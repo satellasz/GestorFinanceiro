@@ -1,12 +1,9 @@
 package org.financeiro.enums;
 
 public enum ClassificacaoTransacao {
-    RECEITA("Receita"),
-    DESPESA("Despesa");
+    RECEITA(),
+    DESPESA();
 
-    private String nome;
-
-    private ClassificacaoTransacao(String nome) {
-        this.nome = nome;
+    ClassificacaoTransacao() {
     }
 }

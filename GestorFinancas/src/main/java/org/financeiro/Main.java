@@ -11,6 +11,7 @@ import org.financeiro.services.transacao.TransacaoService;
 import org.financeiro.services.transacao.TransacaoServiceImpl;
 import org.financeiro.services.usuario.UsuarioService;
 import org.financeiro.services.usuario.UsuarioServiceImpl;
+import org.financeiro.singletons.PainelSingleton;
 
 public class Main {
     private static final CategoriaService categoriaService = new CategoriaServiceImpl(new CategoriaRepositoryImpl());
@@ -23,5 +24,7 @@ public class Main {
 
         categoriaService.cadastrarCategoria(categoria1);
         categoriaService.excluirCategoria(categoria1.getId());
+
+        PainelSingleton.getInstance();
     }
 }
