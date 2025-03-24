@@ -5,52 +5,42 @@ import org.financeiro.enums.TipoCampoTexto;
 import javax.swing.*;
 import java.awt.*;
 
-public class CampoTexto extends JPanel {
-    private int id;
-    private String nome;
+public class CampoTexto extends JPanel implements Input {
+    private final int id;
+    private final String nome;
     private boolean obrigatorio;
-    private int altura;
-    private int largura;
     private String mensagemErro;
-    private TipoCampoTexto tipoCampoTexto;
-    private JTextField textField;
+    private final TipoCampoTexto tipoCampoTexto;
+    private final JTextField textField;
 
-    public CampoTexto(int id, String nome, int altura, int largura, TipoCampoTexto tipoCampoTexto, String mensagemErro, boolean obrigatorio) {
-        this.id = id;
-        this.nome = nome;
-        this.obrigatorio = obrigatorio;
-        this.altura = altura;
-        this.largura = largura;
+    public CampoTexto(int id, String nome, TipoCampoTexto tipoCampoTexto, String mensagemErro, boolean obrigatorio) {
+        this(id, nome, tipoCampoTexto);
+
         this.mensagemErro = mensagemErro;
-        this.tipoCampoTexto = tipoCampoTexto;
-
-        this.textField = new JTextField();
-        this.textField.setSize(new Dimension(altura, largura));
-
-        this.add(textField);
+        this.obrigatorio = obrigatorio;
     }
 
-    public CampoTexto(int id, String nome, int altura, int largura, TipoCampoTexto tipoCampoTexto) {
+    public CampoTexto(int id, String nome, TipoCampoTexto tipoCampoTexto) {
         this.id = id;
         this.nome = nome;
-        this.altura = altura;
-        this.largura = largura;
         this.tipoCampoTexto = tipoCampoTexto;
 
-        this.textField = new JTextField();
-        textField.setColumns(20);
+        this.setLayout(new BorderLayout(100, 0));
 
-        this.add(textField);
+        JLabel label = new JLabel(nome);
+        this.textField = new JTextField();
+
+        this.setPreferredSize(new Dimension(500, 25));
+        this.add(label, BorderLayout.WEST);
+        this.add(this.textField, BorderLayout.CENTER);
+        this.textField.setName(nome);
     }
 
     public TipoCampoTexto getTipoCampoTexto() {
         return tipoCampoTexto;
     }
 
-    public void setTipoCampoTexto(TipoCampoTexto tipoCampoTexto) {
-        this.tipoCampoTexto = tipoCampoTexto;
-    }
-
+    @Override
     public String getMensagemErro() {
         return mensagemErro;
     }
@@ -59,20 +49,9 @@ public class CampoTexto extends JPanel {
         this.mensagemErro = mensagemErro;
     }
 
-    public int getLargura() {
-        return largura;
-    }
-
-    public int getAltura() {
-        return altura;
-    }
-
+    @Override
     public boolean isObrigatorio() {
         return obrigatorio;
-    }
-
-    public void setObrigatorio(boolean obrigatorio) {
-        this.obrigatorio = obrigatorio;
     }
 
     public int getId() {
@@ -83,7 +62,8 @@ public class CampoTexto extends JPanel {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    @Override
+    public String getInput() {
+        return textField.getText();
     }
 }

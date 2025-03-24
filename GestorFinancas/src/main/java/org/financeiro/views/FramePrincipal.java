@@ -40,7 +40,7 @@ public class FramePrincipal extends JFrame {
         conteinerConteudo.add(painelConteudo, BorderLayout.CENTER);
 
         this.setVisible(true);
-        this.setResizable(true);
+        this.setResizable(false);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setSize(new Dimension(1290, 760));
 
