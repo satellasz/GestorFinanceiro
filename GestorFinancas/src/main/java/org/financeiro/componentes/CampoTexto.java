@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CampoTexto extends JPanel implements Input {
+    // TODO tirar o extends de JPanel e colocar como uma propriedade
     private final int id;
     private final String nome;
     private boolean obrigatorio;

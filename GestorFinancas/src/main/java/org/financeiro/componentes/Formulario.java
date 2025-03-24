@@ -1,7 +1,6 @@
 package org.financeiro.componentes;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +14,9 @@ public class Formulario {
         this.jPanel.setBounds(dimensionX, dimensionY, width, height);
     }
 
-    public void addComponente(Input componente) {
+    public <T extends JComponent & Input> void addComponente(T componente) {
         componentes.add(componente);
-        this.jPanel.add((Component) componente);
+        this.jPanel.add(componente);
     }
 
     public List<Input> getComponentes() {
