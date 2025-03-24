@@ -4,7 +4,7 @@ import org.financeiro.componentes.Formulario;
 import org.financeiro.enums.TipoPainelTransicao;
 import org.financeiro.views.paineisconteudo.PainelResumoFinanceiro;
 
-public class ResumoController extends Controller {
+public class ResumoController extends AbstractController {
     public ResumoController() {
         super();
     }

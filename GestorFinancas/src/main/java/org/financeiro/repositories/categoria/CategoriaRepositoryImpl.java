@@ -17,17 +17,17 @@ public class CategoriaRepositoryImpl implements CategoriaRepository {
     }
 
     @Override
-    public void excluirCategoria(int id) {
-        CategoriaSingleton.getInstance().getCategorias().removeIf(x -> x.getId() == id);
+    public void excluirCategoria(String nome) {
+        CategoriaSingleton.getInstance().getCategorias().removeIf(x -> x.getNome() == nome);
     }
 
     @Override
     public void alterarCategoria(Categoria categoria) {
-        CategoriaSingleton.getInstance().getCategorias().set(categoria.getId(), categoria);
+        //CategoriaSingleton.getInstance().getCategorias().set(categoria.getId(), categoria);
     }
 
     @Override
-    public Categoria buscarCategoria(int id) {
-        return CategoriaSingleton.getInstance().getCategorias().stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+    public Categoria buscarCategoria(String nome) {
+        return CategoriaSingleton.getInstance().getCategorias().stream().filter(x -> x.getNome() == nome).findFirst().orElse(null);
     }
 }

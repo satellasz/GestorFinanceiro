@@ -23,8 +23,8 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     @Override
-    public void excluirCategoria(int id) {
-        categoriaRepository.excluirCategoria(id);
+    public void excluirCategoria(String nome) {
+        categoriaRepository.excluirCategoria(nome);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     @Override
-    public Categoria buscarCategoria(int id) {
-        return categoriaRepository.buscarCategoria(id);
+    public Categoria buscarCategoria(String nome) {
+        return categoriaRepository.buscarCategoria(nome);
     }
 }

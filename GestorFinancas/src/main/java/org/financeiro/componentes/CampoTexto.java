@@ -5,66 +5,34 @@ import org.financeiro.enums.TipoCampoTexto;
 import javax.swing.*;
 import java.awt.*;
 
-public class CampoTexto extends JPanel implements Input {
-    // TODO tirar o extends de JPanel e colocar como uma propriedade
-    private final int id;
-    private final String nome;
-    private boolean obrigatorio;
-    private String mensagemErro;
-    private final TipoCampoTexto tipoCampoTexto;
-    private final JTextField textField;
+public class CampoTexto extends AbstractInputComponente {
+    private JTextField textField;
 
-    public CampoTexto(int id, String nome, TipoCampoTexto tipoCampoTexto, String mensagemErro, boolean obrigatorio) {
-        this(id, nome, tipoCampoTexto);
-
-        this.mensagemErro = mensagemErro;
-        this.obrigatorio = obrigatorio;
-    }
-
-    public CampoTexto(int id, String nome, TipoCampoTexto tipoCampoTexto) {
-        this.id = id;
+    public CampoTexto(String nome, TipoCampoTexto tipoCampoTexto, boolean isObrigatorio) {
         this.nome = nome;
         this.tipoCampoTexto = tipoCampoTexto;
+        this.isObrigatorio = isObrigatorio;
 
-        this.setLayout(new BorderLayout(100, 0));
+        setLayoutPadrao(ALTURA_PADRAO_TEXT_FIELD);
 
-        JLabel label = new JLabel(nome);
-        this.textField = new JTextField();
+        addLabelCampo();
 
-        this.setPreferredSize(new Dimension(500, 25));
-        this.add(label, BorderLayout.WEST);
-        this.add(this.textField, BorderLayout.CENTER);
-        this.textField.setName(nome);
-    }
+        addComponentePrincipal();
 
-    public TipoCampoTexto getTipoCampoTexto() {
-        return tipoCampoTexto;
-    }
-
-    @Override
-    public String getMensagemErro() {
-        return mensagemErro;
-    }
-
-    public void setMensagemErro(String mensagemErro) {
-        this.mensagemErro = mensagemErro;
-    }
-
-    @Override
-    public boolean isObrigatorio() {
-        return obrigatorio;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
+        addLabelObrigatorio();
     }
 
     @Override
     public String getInput() {
         return textField.getText();
+    }
+
+    @Override
+    public void addComponentePrincipal() {
+        this.textField = new JTextField();
+        this.textField.setName(nome);
+        this.textField.setPreferredSize(new Dimension(LARGURA_PADRAO_PAINEL, ALTURA_PADRAO_TEXT_FIELD));
+
+        this.getPanel().add(this.textField, BorderLayout.CENTER);
     }
 }

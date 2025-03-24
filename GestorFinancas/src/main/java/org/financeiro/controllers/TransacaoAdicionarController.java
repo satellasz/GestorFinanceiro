@@ -5,7 +5,7 @@ import org.financeiro.enums.TipoPainelTransicao;
 import org.financeiro.views.paineisconteudo.PainelAdicionarTransacao;
 import org.financeiro.views.paineisconteudo.PainelListaTransacoes;
 
-public class TransacaoAdicionarController extends Controller {
+public class TransacaoAdicionarController extends AbstractController {
     @Override
     public void get() {
         painelService.setPainelConteudo(new PainelAdicionarTransacao());

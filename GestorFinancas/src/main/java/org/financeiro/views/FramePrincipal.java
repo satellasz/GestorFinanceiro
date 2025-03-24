@@ -14,13 +14,13 @@ import java.util.List;
 public class FramePrincipal extends JFrame {
     private final Container conteinerConteudo = getContentPane();
     private JPanel painelConteudo;
-    private final List<PainelTransicao> paineisTransicao = new ArrayList<>();
+    private final List<PainelMenu> paineisTransicao = new ArrayList<>();
 
     public void inicializar() {
-        PainelTransicao painelTranscoes = new PainelTransicao(TipoPainelTransicao.TRANSACOES, Color.decode("#779cf2"), new TransacoesController(), 0, 0);
-        PainelTransicao painelCategorias = new PainelTransicao(TipoPainelTransicao.CATEGORIAS, Color.decode("#f2bf77"), new CategoriasController(), 1, 0);
-        PainelTransicao painelResumo = new PainelTransicao(TipoPainelTransicao.RESUMO, Color.decode("#6ff28e"), new ResumoController(), 1, 0);
-        PainelTransicao painelPerfil = new PainelTransicao(TipoPainelTransicao.PERFIL, Color.LIGHT_GRAY, new PerfilController(), 1, 0);
+        PainelMenu painelTranscoes = new PainelMenu(TipoPainelTransicao.TRANSACOES, Color.decode("#779cf2"), new TransacoesController(), 0, 0);
+        PainelMenu painelCategorias = new PainelMenu(TipoPainelTransicao.CATEGORIAS, Color.decode("#f2bf77"), new CategoriasController(), 1, 0);
+        PainelMenu painelResumo = new PainelMenu(TipoPainelTransicao.RESUMO, Color.decode("#6ff28e"), new ResumoController(), 1, 0);
+        PainelMenu painelPerfil = new PainelMenu(TipoPainelTransicao.PERFIL, Color.LIGHT_GRAY, new PerfilController(), 1, 0);
 
         JPanel painelTransicao = new JPanel();
         painelTransicao.setLayout(new GridLayout(4, 1, 0, 0));
@@ -30,7 +30,7 @@ public class FramePrincipal extends JFrame {
         painelTransicao.add(painelPerfil);
 
         for (Component p : painelTransicao.getComponents()) {
-            paineisTransicao.add((PainelTransicao) p);
+            paineisTransicao.add((PainelMenu) p);
         }
 
         painelConteudo = new JPanel();
@@ -51,7 +51,7 @@ public class FramePrincipal extends JFrame {
         return painelConteudo;
     }
 
-    public List<PainelTransicao> getPaineisTransicao() {
+    public List<PainelMenu> getPaineisTransicao() {
         return paineisTransicao;
     }
 }

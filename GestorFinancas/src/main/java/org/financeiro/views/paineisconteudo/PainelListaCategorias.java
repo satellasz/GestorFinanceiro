@@ -7,7 +7,7 @@ import org.financeiro.listeners.GetActionListener;
 import javax.swing.*;
 import java.awt.*;
 
-public class PainelListaCategorias extends PainelCentral {
+public class PainelListaCategorias extends AbstractPainelCentral {
     @Override
     public void onLoad() {
         this.add(getPainelCima(), BorderLayout.NORTH);

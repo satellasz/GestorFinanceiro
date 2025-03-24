@@ -1,12 +1,12 @@
 package org.financeiro.services;
 
 import org.financeiro.enums.TipoPainelTransicao;
-import org.financeiro.views.PainelTransicao;
-import org.financeiro.views.paineisconteudo.PainelCentral;
+import org.financeiro.views.PainelMenu;
+import org.financeiro.views.paineisconteudo.AbstractPainelCentral;
 
 public interface PainelService {
     void limparPainelConteudo();
-    void setPainelConteudo(PainelCentral painelCentral);
-    void setBorderPainelTransicao(PainelTransicao painelTransicao);
-    PainelTransicao getPainelTransicao(TipoPainelTransicao tipoPainelTransicao);
+    void setPainelConteudo(AbstractPainelCentral abstractPainelCentral);
+    void setBorderPainelTransicao(PainelMenu painelMenu);
+    PainelMenu getPainelTransicao(TipoPainelTransicao tipoPainelTransicao);
 }

@@ -1,6 +1,6 @@
 package org.financeiro.views;
 
-import org.financeiro.controllers.Controller;
+import org.financeiro.controllers.AbstractController;
 import org.financeiro.enums.TipoPainelTransicao;
 import org.financeiro.listeners.TransicaoActionListener;
 import org.financeiro.services.ImageService;
@@ -11,13 +11,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class PainelTransicao extends JPanel {
+public class PainelMenu extends JPanel {
     private final int borderTop;
     private final int borderBottom;
     private final TipoPainelTransicao tipoPainelTransicao;
     private final transient BufferedImage image;
 
-    public PainelTransicao(TipoPainelTransicao tipoPainelTransicao, Color cor, Controller controller, int borderTop, int borderBottom) {
+    public PainelMenu(TipoPainelTransicao tipoPainelTransicao, Color cor, AbstractController abstractController, int borderTop, int borderBottom) {
         JLabel jLabel = new JLabel(tipoPainelTransicao.getNome().toUpperCase());
         jLabel.setBorder(new EmptyBorder(10, 50, 10, 50));
         this.add(jLabel);
@@ -25,7 +25,7 @@ public class PainelTransicao extends JPanel {
         this.setBackground(cor);
         setBorderNormal();
 
-        this.addMouseListener(new TransicaoActionListener(controller));
+        this.addMouseListener(new TransicaoActionListener(abstractController));
         this.borderTop = borderTop;
         this.borderBottom = borderBottom;
         this.tipoPainelTransicao = tipoPainelTransicao;

@@ -4,7 +4,7 @@ import org.financeiro.componentes.Formulario;
 import org.financeiro.enums.TipoPainelTransicao;
 import org.financeiro.views.paineisconteudo.PainelListaTransacoes;
 
-public class TransacoesController extends Controller {
+public class TransacoesController extends AbstractController {
 
     @Override
     public void get() {

@@ -1,15 +1,15 @@
 package org.financeiro.listeners;
 
-import org.financeiro.controllers.Controller;
+import org.financeiro.controllers.AbstractController;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class TransicaoActionListener implements MouseListener {
-    private final Controller controller;
+    private final AbstractController abstractController;
 
-    public TransicaoActionListener(Controller controller) {
-        this.controller = controller;
+    public TransicaoActionListener(AbstractController abstractController) {
+        this.abstractController = abstractController;
     }
 
     @Override
@@ -19,7 +19,7 @@ public class TransicaoActionListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        this.controller.get();
+        this.abstractController.get();
     }
 
     @Override

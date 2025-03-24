@@ -1,20 +1,17 @@
 package org.financeiro.models;
 
 public class Categoria {
-    private int id;
     private String nome;
     private String descricao;
     private Usuario usuario;
 
-    public Categoria(int id, String nome, String descricao, Usuario usuario) {
-        this.id = id;
+    public Categoria(String nome, String descricao, Usuario usuario) {
         this.nome = nome;
         this.descricao = descricao;
         this.usuario = usuario;
     }
 
-    public int getId() {
-        return id;
+    public Categoria() {
     }
 
     public String getNome() {
