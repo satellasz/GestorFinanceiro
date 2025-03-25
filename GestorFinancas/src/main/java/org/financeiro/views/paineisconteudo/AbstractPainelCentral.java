@@ -15,7 +15,7 @@ public abstract class AbstractPainelCentral extends JPanel {
     protected JPanel painelCima;
     protected JPanel painelBaixo;
     protected final transient CategoriaService categoriaService = new CategoriaServiceImpl(new CategoriaRepositoryImpl());
-    protected final Formulario formulario = new Formulario(150, 50, 800, 500);
+    protected final transient Formulario formulario = new Formulario(150, 50, 800, 500);
 
     protected AbstractPainelCentral() {
         this.setLayout(new BorderLayout());

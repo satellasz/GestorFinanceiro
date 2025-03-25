@@ -3,6 +3,7 @@ package org.financeiro.services;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 
 public class ImageServiceImpl implements ImageService {
@@ -15,5 +16,10 @@ public class ImageServiceImpl implements ImageService {
         }
 
         return null;
+    }
+
+    @Override
+    public URL getImageUrl(String path) {
+        return getClass().getClassLoader().getResource(path);
     }
 }

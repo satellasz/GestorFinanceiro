@@ -25,8 +25,12 @@ public class CategoriaAdicionarController extends AbstractController {
             this.validate(formulario);
             Categoria categoria = new Categoria();
             AbstractInputComponente nome = formulario.getComponentes().stream().filter(x -> x.getNome().equals("Nome")).findFirst().orElse(null);
+            AbstractInputComponente descricao = formulario.getComponentes().stream().filter(x -> x.getNome().equals("Descricao")).findFirst().orElse(null);
             if (nome != null) {
                 categoria.setNome(nome.getInput());
+            }
+            if (descricao != null) {
+                categoria.setDescricao(descricao.getInput());
             }
 
             this.categoriaService.cadastrarCategoria(categoria);
