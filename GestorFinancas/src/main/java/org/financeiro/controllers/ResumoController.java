@@ -1,18 +1,14 @@
 package org.financeiro.controllers;
 
 import org.financeiro.componentes.Formulario;
-import org.financeiro.enums.TipoPainelTransicao;
+import org.financeiro.enums.TipoPainelMenu;
 import org.financeiro.views.paineisconteudo.PainelResumoFinanceiro;
 
 public class ResumoController extends AbstractController {
-    public ResumoController() {
-        super();
-    }
-
     @Override
     public void get() {
         painelService.setPainelConteudo(new PainelResumoFinanceiro());
-        painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelTransicao.RESUMO));
+        painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelMenu.RESUMO));
     }
 
     @Override

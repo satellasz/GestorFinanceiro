@@ -8,14 +8,4 @@ public class PainelResumoFinanceiro extends AbstractPainelCentral {
         this.add(getPainelCima(), BorderLayout.NORTH);
         this.add(getPainelBaixo(), BorderLayout.SOUTH);
     }
-
-    @Override
-    protected void customizarPainelCima() {
-        super.customizarPainelCima();
-    }
-
-    @Override
-    protected void customizarPainelBaixo() {
-
-    }
 }

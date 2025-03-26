@@ -1,8 +1,5 @@
 package org.financeiro.componentes.subcomponentes;
 
-import org.financeiro.services.ImageService;
-import org.financeiro.services.ImageServiceImpl;
-
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
@@ -11,10 +8,9 @@ import java.awt.image.BufferedImage;
 public class ColunaRenderer extends JPanel implements TableCellRenderer {
     private final transient BufferedImage image;
 
-    public ColunaRenderer(Color color, String pathImagem) {
+    public ColunaRenderer(Color color, BufferedImage image) {
         this.setBackground(color);
-        ImageService imageService = new ImageServiceImpl();
-        this.image = imageService.getImage(pathImagem);
+        this.image = image;
     }
 
     @Override

@@ -1,12 +1,9 @@
 package org.financeiro.views.paineisconteudo;
 
-import org.financeiro.componentes.Botao;
-import org.financeiro.componentes.CampoTexto;
-import org.financeiro.componentes.CampoTextoArea;
-import org.financeiro.componentes.ComboBox;
-import org.financeiro.controllers.CategoriaAdicionarController;
-import org.financeiro.controllers.TransacaoAdicionarController;
+import org.financeiro.componentes.*;
+import org.financeiro.enums.ClassificacaoTransacao;
 import org.financeiro.enums.TipoCampoTexto;
+import org.financeiro.enums.TipoInputComponente;
 import org.financeiro.listeners.PostActionListener;
 import org.financeiro.models.Categoria;
 
@@ -25,19 +22,27 @@ public class PainelAdicionarTransacao extends AbstractPainelCentral {
         painel.setLayout(null);
         painel.setBorder(new LineBorder(Color.black, 2));
 
-        CampoTexto campoTextoNome = new CampoTexto("Nome", TipoCampoTexto.TEXTO, true);
-        CampoTextoArea campoTextoDescricao = new CampoTextoArea("Descricao", TipoCampoTexto.TEXTO, false);
-        ComboBox comboBoxCategoria = new ComboBox("Categoria", true);
+        CampoTexto campoTextoValor = new CampoTexto(TipoInputComponente.VALOR_TRANSACAO, "Valor da transação", TipoCampoTexto.NUMERO, true);
+        ComboBox comboBoxCategoria = new ComboBox(TipoInputComponente.TRANSACAO_CATEGORIA,"Categoria", true);
+        ComboBox comboBoxClassificacao = new ComboBox(TipoInputComponente.CLASSFICACAO_TRANSACAO,"Classificação", true);
+        CampoTextoArea campoTextoDescricao = new CampoTextoArea(TipoInputComponente.DESCRICAO_CATEGORIA, "Descrição", TipoCampoTexto.TEXTO, false);
+        CampoData campoData = new CampoData(TipoInputComponente.DATA_TRANSACAO, "Data", true);
 
         for (Categoria categoria : this.categoriaService.listarCategorias()) {
             comboBoxCategoria.addValorComboBox(categoria.getNome());
         }
 
-        this.formulario.addComponente(campoTextoNome);
-        this.formulario.addComponente(campoTextoDescricao);
-        this.formulario.addComponente(comboBoxCategoria);
+        for (ClassificacaoTransacao classificacaoTransacao : ClassificacaoTransacao.values()) {
+            comboBoxClassificacao.addValorComboBox(classificacaoTransacao.getNome());
+        }
 
-        Botao botaoSalvar = new Botao(new PostActionListener(new TransacaoAdicionarController(), this.formulario));
+        this.formulario.addComponente(campoTextoValor);
+        this.formulario.addComponente(comboBoxCategoria);
+        this.formulario.addComponente(comboBoxClassificacao);
+        this.formulario.addComponente(campoTextoDescricao);
+        this.formulario.addComponente(campoData);
+
+        Botao botaoSalvar = new Botao(new PostActionListener(this.transacaoAdicionarController, this.formulario));
         botaoSalvar.setText("Salvar");
         botaoSalvar.setBounds(500, 500, 100, 50);
 

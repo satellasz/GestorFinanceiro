@@ -1,6 +1,6 @@
 package org.financeiro.services;
 
-import org.financeiro.enums.TipoPainelTransicao;
+import org.financeiro.enums.TipoPainelMenu;
 import org.financeiro.singletons.SwingSingleton;
 import org.financeiro.views.PainelMenu;
 import org.financeiro.views.paineisconteudo.AbstractPainelCentral;
@@ -18,6 +18,7 @@ public class PainelServiceImpl implements PainelService {
     public void setPainelConteudo(AbstractPainelCentral abstractPainelCentral) {
         limparPainelConteudo();
         SwingSingleton.getInstance().getPainelConteudo().add(abstractPainelCentral);
+        abstractPainelCentral.onLoad();
         SwingSingleton.getInstance().getPainelConteudo().updateUI();
     }
 
@@ -33,7 +34,7 @@ public class PainelServiceImpl implements PainelService {
     }
 
     @Override
-    public PainelMenu getPainelTransicao(TipoPainelTransicao tipoPainelTransicao) {
-        return SwingSingleton.getInstance().getPaineisTransicao().stream().filter(x -> x.getTipoPainelTransicao() == tipoPainelTransicao).findFirst().orElse(null);
+    public PainelMenu getPainelTransicao(TipoPainelMenu tipoPainelMenu) {
+        return SwingSingleton.getInstance().getPaineisTransicao().stream().filter(x -> x.getTipoPainelTransicao() == tipoPainelMenu).findFirst().orElse(null);
     }
 }

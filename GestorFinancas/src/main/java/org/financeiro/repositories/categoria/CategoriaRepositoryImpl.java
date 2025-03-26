@@ -17,8 +17,8 @@ public class CategoriaRepositoryImpl implements CategoriaRepository {
     }
 
     @Override
-    public void excluirCategoria(String nome) {
-        CategoriaSingleton.getInstance().getCategorias().removeIf(x -> x.getNome() == nome);
+    public void excluirCategoria(int id) {
+        CategoriaSingleton.getInstance().getCategorias().removeIf(x -> x.getId() == id);
     }
 
     @Override

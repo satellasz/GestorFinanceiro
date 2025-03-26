@@ -1,5 +1,8 @@
 package org.financeiro.services;
 
+import org.financeiro.enums.PathResources;
+import org.financeiro.singletons.ImageSingleton;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -19,7 +22,9 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public URL getImageUrl(String path) {
-        return getClass().getClassLoader().getResource(path);
+    public void loadImagens() {
+        for (PathResources path : PathResources.values()) {
+            ImageSingleton.getInstance().addImage(path.getNome(), getImage(path.getPath()));
+        }
     }
 }

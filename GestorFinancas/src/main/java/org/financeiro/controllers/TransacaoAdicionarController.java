@@ -1,20 +1,28 @@
 package org.financeiro.controllers;
 
 import org.financeiro.componentes.Formulario;
-import org.financeiro.enums.TipoPainelTransicao;
+import org.financeiro.enums.TipoPainelMenu;
+import org.financeiro.exceptions.CampoObrigatorioException;
 import org.financeiro.views.paineisconteudo.PainelAdicionarTransacao;
-import org.financeiro.views.paineisconteudo.PainelListaTransacoes;
+
+import javax.swing.*;
 
 public class TransacaoAdicionarController extends AbstractController {
     @Override
     public void get() {
         painelService.setPainelConteudo(new PainelAdicionarTransacao());
-        painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelTransicao.TRANSACOES));
+        painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelMenu.TRANSACOES));
     }
 
     @Override
     public void post(Formulario formulario) {
-        painelService.setPainelConteudo(new PainelListaTransacoes());
-        painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelTransicao.TRANSACOES));
+        try {
+            this.validate(formulario);
+
+            painelService.setPainelConteudo(new PainelAdicionarTransacao());
+            painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelMenu.TRANSACOES));
+        } catch (CampoObrigatorioException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Campo obrigatório", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

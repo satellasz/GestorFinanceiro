@@ -1,6 +1,7 @@
 package org.financeiro.models;
 
 public class Categoria {
+    private int id;
     private String nome;
     private String descricao;
     private Usuario usuario;
@@ -11,7 +12,11 @@ public class Categoria {
         this.usuario = usuario;
     }
 
-    public Categoria() {
+    public Categoria(int id, String nome, String descricao, Usuario usuario) {
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.usuario = usuario;
     }
 
     public String getNome() {
@@ -28,5 +33,13 @@ public class Categoria {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 }

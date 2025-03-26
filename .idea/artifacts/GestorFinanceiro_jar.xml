@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GestorFinanceiro:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/GestorFinanceiro_jar</output-path>
+    <root id="archive" name="GestorFinanceiro.jar">
+      <element id="module-output" name="GestorFinancas" />
+    </root>
+  </artifact>
+</component>

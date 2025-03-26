@@ -14,7 +14,9 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     public void cadastrarCategoria(Categoria categoria) {
-        categoriaRepository.cadastrarCategoria(categoria);
+        Categoria categoriaNova = new Categoria(getIdUltimaCategoria() + 1, categoria.getNome(), categoria.getDescricao(), categoria.getUsuario());
+
+        categoriaRepository.cadastrarCategoria(categoriaNova);
     }
 
     @Override
@@ -23,8 +25,8 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     @Override
-    public void excluirCategoria(String nome) {
-        categoriaRepository.excluirCategoria(nome);
+    public void excluirCategoria(int id) {
+        categoriaRepository.excluirCategoria(id);
     }
 
     @Override
@@ -35,5 +37,18 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Override
     public Categoria buscarCategoria(String nome) {
         return categoriaRepository.buscarCategoria(nome);
+    }
+
+    @Override
+    public int getIdUltimaCategoria() {
+        List<Categoria> categorias = listarCategorias();
+
+        if (categorias.isEmpty()) {
+            return 0;
+        }
+
+        Categoria categoria = categoriaRepository.listarCategorias().getLast();
+
+        return categoria.getId();
     }
 }

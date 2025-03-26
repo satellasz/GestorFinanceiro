@@ -3,6 +3,7 @@ package org.financeiro.views.paineisconteudo;
 import org.financeiro.componentes.Botao;
 import org.financeiro.componentes.Tabela;
 import org.financeiro.controllers.CategoriaAdicionarController;
+import org.financeiro.controllers.TransacoesController;
 import org.financeiro.listeners.GetActionListener;
 import org.financeiro.viewmodels.CategoriaModelTabela;
 
@@ -25,7 +26,7 @@ public class PainelListaCategorias extends AbstractPainelCentral {
 
         JPanel jPanel2 = new JPanel();
         jPanel2.setLayout(null);
-        Botao botaoAdcionar = new Botao(new GetActionListener(new CategoriaAdicionarController()));
+        Botao botaoAdcionar = new Botao(new GetActionListener(this.categoriaAdicionarController));
         botaoAdcionar.setBounds(400, 175, 125, 50);
         botaoAdcionar.setText("Adicionar");
         jPanel2.add(botaoAdcionar);
@@ -41,7 +42,7 @@ public class PainelListaCategorias extends AbstractPainelCentral {
         jPanel1.setLayout(new BorderLayout());
         jPanel1.setBounds(40, 10, 1000, 400);
 
-        Tabela tabela = new Tabela(new CategoriaModelTabela());
+        Tabela tabela = new Tabela(new CategoriaModelTabela(this.categoriaService.listarCategorias()), this.categoriasController);
 
         jPanel1.add(tabela.getPainel());
 

@@ -1,7 +1,6 @@
 package org.financeiro.views.paineisconteudo;
 
 import org.financeiro.componentes.Botao;
-import org.financeiro.controllers.TransacaoAdicionarController;
 import org.financeiro.listeners.GetActionListener;
 
 import javax.swing.*;
@@ -24,7 +23,7 @@ public class PainelListaTransacoes extends AbstractPainelCentral {
         JPanel jPanel2 = new JPanel();
         jPanel2.setLayout(null);
         jPanel2.setBackground(Color.GRAY);
-        Botao botaoAdcionar = new Botao(new GetActionListener(new TransacaoAdicionarController()));
+        Botao botaoAdcionar = new Botao(new GetActionListener(this.transacaoAdicionarController));
         botaoAdcionar.setBounds(400, 175, 125, 50);
         botaoAdcionar.setText("Adicionar");
         jPanel2.add(botaoAdcionar);

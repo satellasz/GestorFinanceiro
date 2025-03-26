@@ -1,18 +1,14 @@
 package org.financeiro.controllers;
 
 import org.financeiro.componentes.Formulario;
-import org.financeiro.enums.TipoPainelTransicao;
+import org.financeiro.enums.TipoPainelMenu;
 import org.financeiro.views.paineisconteudo.PainelPerfil;
 
 public class PerfilController extends AbstractController {
-    public PerfilController() {
-        super();
-    }
-
     @Override
     public void get() {
         painelService.setPainelConteudo(new PainelPerfil());
-        painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelTransicao.PERFIL));
+        painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelMenu.PERFIL));
     }
 
     @Override

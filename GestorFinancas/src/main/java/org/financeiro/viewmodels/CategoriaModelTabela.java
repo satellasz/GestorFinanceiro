@@ -1,9 +1,6 @@
 package org.financeiro.viewmodels;
 
 import org.financeiro.models.Categoria;
-import org.financeiro.repositories.categoria.CategoriaRepositoryImpl;
-import org.financeiro.services.categoria.CategoriaService;
-import org.financeiro.services.categoria.CategoriaServiceImpl;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
@@ -11,13 +8,12 @@ import java.util.List;
 public class CategoriaModelTabela extends AbstractTableModel {
     private final transient List<Categoria> categoriaList;
 
-    public CategoriaModelTabela() {
-        CategoriaService categoriaService = new CategoriaServiceImpl(new CategoriaRepositoryImpl());
-        this.categoriaList = categoriaService.listarCategorias();
+    public CategoriaModelTabela(List<Categoria> categoriaList) {
+        this.categoriaList = categoriaList;
     }
 
     private final String[] colunmas = {
-            "Nome", "Descrição", "Editar", "Excluir"
+            "Id", "Nome", "Descrição", "Editar", "Excluir"
     };
 
     @Override
@@ -35,10 +31,11 @@ public class CategoriaModelTabela extends AbstractTableModel {
         Categoria categoria = this.categoriaList.get(rowIndex);
 
         return switch (columnIndex) {
-            case 0 -> categoria.getNome();
-            case 1 -> categoria.getDescricao();
-            case 2 -> "Editar";
-            case 3 -> "Excluir";
+            case 0 -> categoria.getId();
+            case 1 -> categoria.getNome();
+            case 2 -> categoria.getDescricao();
+            case 3 -> "Editar";
+            case 4 -> "Excluir";
             default -> null;
         };
     }
@@ -48,4 +45,9 @@ public class CategoriaModelTabela extends AbstractTableModel {
         return colunmas[column];
     }
 
+
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return columnIndex >= getColumnCount() - 2;
+    }
 }

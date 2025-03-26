@@ -1,10 +1,11 @@
 package org.financeiro.views;
 
 import org.financeiro.controllers.AbstractController;
-import org.financeiro.enums.TipoPainelTransicao;
+import org.financeiro.enums.TipoPainelMenu;
 import org.financeiro.listeners.TransicaoActionListener;
 import org.financeiro.services.ImageService;
 import org.financeiro.services.ImageServiceImpl;
+import org.financeiro.singletons.ImageSingleton;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -14,11 +15,11 @@ import java.awt.image.BufferedImage;
 public class PainelMenu extends JPanel {
     private final int borderTop;
     private final int borderBottom;
-    private final TipoPainelTransicao tipoPainelTransicao;
+    private final TipoPainelMenu tipoPainelMenu;
     private final transient BufferedImage image;
 
-    public PainelMenu(TipoPainelTransicao tipoPainelTransicao, Color cor, AbstractController abstractController, int borderTop, int borderBottom) {
-        JLabel jLabel = new JLabel(tipoPainelTransicao.getNome().toUpperCase());
+    public PainelMenu(TipoPainelMenu tipoPainelMenu, Color cor, AbstractController abstractController, int borderTop, int borderBottom) {
+        JLabel jLabel = new JLabel(tipoPainelMenu.getNome().toUpperCase());
         jLabel.setBorder(new EmptyBorder(10, 50, 10, 50));
         this.add(jLabel);
         this.setPreferredSize(new Dimension(192, 180));
@@ -28,17 +29,16 @@ public class PainelMenu extends JPanel {
         this.addMouseListener(new TransicaoActionListener(abstractController));
         this.borderTop = borderTop;
         this.borderBottom = borderBottom;
-        this.tipoPainelTransicao = tipoPainelTransicao;
-        ImageService imageService = new ImageServiceImpl();
-        this.image = imageService.getImage(tipoPainelTransicao.getPathImagem());
+        this.tipoPainelMenu = tipoPainelMenu;
+        this.image = ImageSingleton.getInstance().getImage(tipoPainelMenu.getNome());
     }
 
     public void setBorderNormal() {
         this.setBorder(BorderFactory.createMatteBorder(borderTop, 0, borderBottom, 1, Color.BLACK));
     }
 
-    public TipoPainelTransicao getTipoPainelTransicao() {
-        return tipoPainelTransicao;
+    public TipoPainelMenu getTipoPainelTransicao() {
+        return tipoPainelMenu;
     }
 
     @Override
