@@ -4,6 +4,8 @@ import org.financeiro.enums.TipoInputComponente;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CampoData extends AbstractInputComponente {
@@ -22,7 +24,9 @@ public class CampoData extends AbstractInputComponente {
 
     @Override
     public String getInput() {
-        return dateSpinner.getValue().toString();
+        Date date = (Date) dateSpinner.getValue();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(date);
     }
 
     @Override
@@ -38,5 +42,16 @@ public class CampoData extends AbstractInputComponente {
         this.dateSpinner.setPreferredSize(new Dimension(LARGURA_PADRAO_PAINEL, ALTURA_PADRAO_TEXT_FIELD));
 
         this.getPanel().add(this.dateSpinner, BorderLayout.CENTER);
+    }
+
+    @Override
+    public void setInput(String input) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date date = sdf.parse(input);
+            dateSpinner.setValue(date);
+        } catch (ParseException e) {
+            System.out.println("Erro ao converter a data: " + e.getMessage());
+        }
     }
 }

@@ -2,9 +2,7 @@ package org.financeiro.views;
 
 import org.financeiro.controllers.AbstractController;
 import org.financeiro.enums.TipoPainelMenu;
-import org.financeiro.listeners.TransicaoActionListener;
-import org.financeiro.services.ImageService;
-import org.financeiro.services.ImageServiceImpl;
+import org.financeiro.listeners.MenuActionListener;
 import org.financeiro.singletons.ImageSingleton;
 
 import javax.swing.*;
@@ -26,7 +24,7 @@ public class PainelMenu extends JPanel {
         this.setBackground(cor);
         setBorderNormal();
 
-        this.addMouseListener(new TransicaoActionListener(abstractController));
+        this.addMouseListener(new MenuActionListener(abstractController));
         this.borderTop = borderTop;
         this.borderBottom = borderBottom;
         this.tipoPainelMenu = tipoPainelMenu;

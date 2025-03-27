@@ -7,7 +7,8 @@ import java.util.List;
 public interface CategoriaRepository {
     void cadastrarCategoria(Categoria Categoria);
     List<Categoria> listarCategorias();
-    void excluirCategoria(int id);
+    boolean excluirCategoria(int id);
     void alterarCategoria(Categoria categoria);
     Categoria buscarCategoria(String nome);
+    Categoria buscarCategoria(int id);
 }

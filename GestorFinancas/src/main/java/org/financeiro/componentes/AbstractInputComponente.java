@@ -58,6 +58,8 @@ public abstract class AbstractInputComponente {
 
     public abstract void addComponentePrincipal();
 
+    public abstract void setInput(String input);
+
     public JPanel getPanel() {
         return panel;
     }

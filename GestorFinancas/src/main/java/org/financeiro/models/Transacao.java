@@ -2,22 +2,32 @@ package org.financeiro.models;
 
 import org.financeiro.enums.ClassificacaoTransacao;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Objects;
 
 public class Transacao {
     private int id;
     private String descricao;
     private double valor;
-    private Categoria categoria;
+    private int idCategoria;
     private ClassificacaoTransacao classificacao;
     private Usuario usuario;
-    private Date dataTransacao;
+    private String dataTransacao;
 
-    public Transacao(int id, String descricao, double valor, Categoria categoria, ClassificacaoTransacao classificacao, Usuario usuario, Date dataTransacao) {
+    public Transacao(double valor, String descricao, int idCategoria, ClassificacaoTransacao classificacao, Usuario usuario, String dataTransacao) {
+        this.descricao = descricao;
+        this.valor = valor;
+        this.idCategoria = idCategoria;
+        this.classificacao = classificacao;
+        this.usuario = usuario;
+        this.dataTransacao = dataTransacao;
+    }
+
+    public Transacao(int id, double valor, String descricao, int idCategoria, ClassificacaoTransacao classificacao, Usuario usuario, String dataTransacao) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
-        this.categoria = categoria;
+        this.idCategoria = idCategoria;
         this.classificacao = classificacao;
         this.usuario = usuario;
         this.dataTransacao = dataTransacao;
@@ -26,6 +36,7 @@ public class Transacao {
     public int getId() {
         return id;
     }
+
     public String getDescricao() {
         return descricao;
     }
@@ -42,12 +53,8 @@ public class Transacao {
         this.valor = valor;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public int getIdCategoria() {
+        return idCategoria;
     }
 
     public ClassificacaoTransacao getClassificacao() {
@@ -56,5 +63,22 @@ public class Transacao {
 
     public void setClassificacao(ClassificacaoTransacao classificacao) {
         this.classificacao = classificacao;
+    }
+
+    public String getDataTransacao() {
+        return dataTransacao;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Transacao that = (Transacao) obj;
+        return this.id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

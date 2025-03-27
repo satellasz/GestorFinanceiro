@@ -7,6 +7,7 @@ import java.util.List;
 public class Formulario {
     private final List<AbstractInputComponente> componentes;
     private final JPanel jPanel;
+    private int idObjeto;
 
     public Formulario(int dimensionX, int dimensionY, int width, int height) {
         this.componentes = new ArrayList<>();
@@ -25,5 +26,13 @@ public class Formulario {
 
     public JPanel getPanel() {
         return jPanel;
+    }
+
+    public int getIdObjeto() {
+        return idObjeto;
+    }
+
+    public void setIdObjeto(int idObjeto) {
+        this.idObjeto = idObjeto;
     }
 }

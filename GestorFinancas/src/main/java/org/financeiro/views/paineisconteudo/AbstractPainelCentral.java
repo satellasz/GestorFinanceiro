@@ -2,11 +2,12 @@ package org.financeiro.views.paineisconteudo;
 
 import org.financeiro.componentes.Formulario;
 import org.financeiro.controllers.*;
-import org.financeiro.repositories.categoria.CategoriaRepositoryImpl;
 import org.financeiro.services.ImageService;
 import org.financeiro.services.ImageServiceImpl;
 import org.financeiro.services.categoria.CategoriaService;
 import org.financeiro.services.categoria.CategoriaServiceImpl;
+import org.financeiro.services.transacao.TransacaoService;
+import org.financeiro.services.transacao.TransacaoServiceImpl;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -23,12 +24,14 @@ public abstract class AbstractPainelCentral extends JPanel {
     protected static final int ALTURA_PAINEL_BAIXO = 473;
     protected JPanel painelCima;
     protected JPanel painelBaixo;
-    protected final transient CategoriaService categoriaService = new CategoriaServiceImpl(new CategoriaRepositoryImpl());
+    protected final transient CategoriaService categoriaService = new CategoriaServiceImpl();
+    protected final transient TransacaoService transacaoService = new TransacaoServiceImpl();
     protected final transient ImageService imageService = new ImageServiceImpl();
     protected final transient Formulario formulario = new Formulario(150, 50, 800, 500);
 
     protected AbstractPainelCentral() {
         this.setLayout(new BorderLayout());
+        this.setBackground(Color.WHITE);
     }
 
     public abstract void onLoad();

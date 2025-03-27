@@ -34,4 +34,9 @@ public class CampoTexto extends AbstractInputComponente {
 
         this.getPanel().add(this.textField, BorderLayout.CENTER);
     }
+
+    @Override
+    public void setInput(String input) {
+        this.textField.setText(input);
+    }
 }

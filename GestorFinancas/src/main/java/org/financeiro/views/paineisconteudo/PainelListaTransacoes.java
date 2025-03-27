@@ -1,7 +1,10 @@
 package org.financeiro.views.paineisconteudo;
 
 import org.financeiro.componentes.Botao;
+import org.financeiro.componentes.Tabela;
 import org.financeiro.listeners.GetActionListener;
+import org.financeiro.viewmodels.CategoriaModelTabela;
+import org.financeiro.viewmodels.TransacaoModelTabela;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,17 +15,16 @@ public class PainelListaTransacoes extends AbstractPainelCentral {
         this.add(getPainelCima(), BorderLayout.NORTH);
         this.add(getPainelBaixo(), BorderLayout.SOUTH);
         customizarPainelCima();
+        customizarPainelBaixo();
     }
 
     @Override
     protected void customizarPainelCima() {
         JPanel jPanel1 = new JPanel();
         jPanel1.setLayout(null);
-        jPanel1.setBackground(Color.RED);
 
         JPanel jPanel2 = new JPanel();
         jPanel2.setLayout(null);
-        jPanel2.setBackground(Color.GRAY);
         Botao botaoAdcionar = new Botao(new GetActionListener(this.transacaoAdicionarController));
         botaoAdcionar.setBounds(400, 175, 125, 50);
         botaoAdcionar.setText("Adicionar");
@@ -31,5 +33,19 @@ public class PainelListaTransacoes extends AbstractPainelCentral {
         this.painelCima.setLayout(new GridLayout(1, 2));
         this.painelCima.add(jPanel1);
         this.painelCima.add(jPanel2);
+    }
+
+    @Override
+    protected void customizarPainelBaixo() {
+        JPanel jPanel1 = new JPanel();
+        jPanel1.setLayout(new BorderLayout());
+        jPanel1.setBounds(40, 10, 1000, 400);
+
+        Tabela tabela = new Tabela(new TransacaoModelTabela(this.transacaoService.listarTransacoes(), this.categoriaService), this.transacoesController);
+
+        jPanel1.add(tabela.getPainel());
+
+        this.painelBaixo.setLayout(null);
+        this.painelBaixo.add(jPanel1);
     }
 }

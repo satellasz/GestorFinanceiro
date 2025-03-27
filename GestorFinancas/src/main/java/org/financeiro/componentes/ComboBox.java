@@ -43,6 +43,11 @@ public class ComboBox extends AbstractInputComponente {
         this.getPanel().add(this.jComboBox, BorderLayout.CENTER);
     }
 
+    @Override
+    public void setInput(String input) {
+        this.jComboBox.setSelectedItem(input);
+    }
+
     public void addValorComboBox(String valor) {
         this.jComboBox.addItem(valor);
     }

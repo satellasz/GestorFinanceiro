@@ -31,7 +31,13 @@ public class CampoTextoArea extends AbstractInputComponente {
         this.textArea = new JTextArea();
         this.textArea.setPreferredSize(new Dimension(LARGURA_PADRAO_PAINEL, ALTURA_PADRAO_TEXT_AREA));
         this.textArea.setName(tipoInputComponente.getId());
+        this.textArea.setLineWrap(true);
 
         this.getPanel().add(this.textArea, BorderLayout.CENTER);
+    }
+
+    @Override
+    public void setInput(String input) {
+        this.textArea.setText(input);
     }
 }

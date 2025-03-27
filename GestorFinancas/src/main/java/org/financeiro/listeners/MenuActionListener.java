@@ -5,10 +5,10 @@ import org.financeiro.controllers.AbstractController;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class TransicaoActionListener implements MouseListener {
+public class MenuActionListener implements MouseListener {
     private final AbstractController abstractController;
 
-    public TransicaoActionListener(AbstractController abstractController) {
+    public MenuActionListener(AbstractController abstractController) {
         this.abstractController = abstractController;
     }
 

@@ -17,13 +17,15 @@ public class TransacaoRepositoryImpl implements TransacaoRepository {
     }
 
     @Override
-    public void excluirTransacao(int id) {
-        TransacaoSingleton.getInstance().getTransacoes().removeIf(x -> x.getId() == id);
+    public boolean excluirTransacao(int id) {
+        return TransacaoSingleton.getInstance().getTransacoes().removeIf(x -> x.getId() == id);
     }
 
     @Override
     public void alterarTransacao(Transacao transacao) {
-        TransacaoSingleton.getInstance().getTransacoes().set(transacao.getId(), transacao);
+        int index = TransacaoSingleton.getInstance().getTransacoes().indexOf(transacao);
+
+        TransacaoSingleton.getInstance().getTransacoes().set(index, transacao);
     }
 
     @Override

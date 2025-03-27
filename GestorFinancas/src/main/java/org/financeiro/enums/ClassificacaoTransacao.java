@@ -13,4 +13,13 @@ public enum ClassificacaoTransacao {
     public String getNome() {
         return nome;
     }
+
+    public static ClassificacaoTransacao buscarClassificacao(String nome) {
+        for (ClassificacaoTransacao classificacao : ClassificacaoTransacao.values()) {
+            if (classificacao.getNome().equals(nome)) {
+                return classificacao;
+            }
+        }
+        return null;
+    }
 }

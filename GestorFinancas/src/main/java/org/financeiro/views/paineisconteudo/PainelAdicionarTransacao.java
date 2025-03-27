@@ -6,15 +6,27 @@ import org.financeiro.enums.TipoCampoTexto;
 import org.financeiro.enums.TipoInputComponente;
 import org.financeiro.listeners.PostActionListener;
 import org.financeiro.models.Categoria;
+import org.financeiro.models.Transacao;
+import org.financeiro.utils.Utils;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class PainelAdicionarTransacao extends AbstractPainelCentral {
+    private transient Transacao transacao = null;
+    private transient Categoria categoria = null;
     @Override
     public void onLoad() {
         this.add(getPainelAdicionarTransacao(), BorderLayout.CENTER);
+    }
+
+    public PainelAdicionarTransacao(Transacao transacao, Categoria categoria) {
+        this.transacao = transacao;
+        this.categoria = categoria;
+    }
+
+    public PainelAdicionarTransacao() {
     }
 
     private JPanel getPainelAdicionarTransacao() {
@@ -28,12 +40,21 @@ public class PainelAdicionarTransacao extends AbstractPainelCentral {
         CampoTextoArea campoTextoDescricao = new CampoTextoArea(TipoInputComponente.DESCRICAO_CATEGORIA, "Descrição", TipoCampoTexto.TEXTO, false);
         CampoData campoData = new CampoData(TipoInputComponente.DATA_TRANSACAO, "Data", true);
 
-        for (Categoria categoria : this.categoriaService.listarCategorias()) {
-            comboBoxCategoria.addValorComboBox(categoria.getNome());
+        for (Categoria categoriaEncontrada : this.categoriaService.listarCategorias()) {
+            comboBoxCategoria.addValorComboBox(categoriaEncontrada.getNome());
         }
 
         for (ClassificacaoTransacao classificacaoTransacao : ClassificacaoTransacao.values()) {
             comboBoxClassificacao.addValorComboBox(classificacaoTransacao.getNome());
+        }
+
+        if (this.transacao != null) {
+            campoTextoValor.setInput(String.valueOf(this.transacao.getValor()));
+            comboBoxCategoria.setInput(this.categoria.getNome());
+            comboBoxClassificacao.setInput(this.transacao.getClassificacao().getNome());
+            campoTextoDescricao.setInput(this.transacao.getDescricao());
+            campoData.setInput(transacao.getDataTransacao());
+            this.formulario.setIdObjeto(transacao.getId());
         }
 
         this.formulario.addComponente(campoTextoValor);
