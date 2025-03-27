@@ -4,6 +4,7 @@ import org.financeiro.views.FramePrincipal;
 import org.financeiro.views.PainelMenu;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.List;
 
 public class SwingSingleton {
@@ -24,10 +25,18 @@ public class SwingSingleton {
     }
 
     public JPanel getPainelConteudo() {
-        return framePrincipal.getPainelConteudo();
+        return framePrincipal.getPainelPrincipal().getPainelConteudo();
     }
 
     public List<PainelMenu> getPaineisTransicao() {
-        return framePrincipal.getPaineisTransicao();
+        return framePrincipal.getPainelPrincipal().getPaineisTransicao();
+    }
+
+    public Container getContainerConteudo() {
+        return framePrincipal.getConteinerConteudo();
+    }
+
+    public JPanel getPainelPrincipal() {
+        return framePrincipal.getPainelPrincipal();
     }
 }

@@ -1,11 +1,6 @@
 package org.financeiro.utils;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class Utils {
-    private static final DateTimeFormatter formatterPadrao = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
     private Utils() {
     }
 
@@ -21,9 +16,5 @@ public class Utils {
 
     public static boolean isStringVazia(String str) {
         return str == null || str.trim().isEmpty();
-    }
-
-    public static LocalDate getDataFormatada(String str) {
-        return LocalDate.parse(str, formatterPadrao);
     }
 }

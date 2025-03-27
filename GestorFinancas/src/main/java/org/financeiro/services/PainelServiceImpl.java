@@ -5,6 +5,7 @@ import org.financeiro.singletons.SwingSingleton;
 import org.financeiro.views.PainelMenu;
 import org.financeiro.views.paineisconteudo.AbstractPainelCentral;
 
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
@@ -12,6 +13,18 @@ public class PainelServiceImpl implements PainelService {
     @Override
     public void limparPainelConteudo() {
         SwingSingleton.getInstance().getPainelConteudo().removeAll();
+    }
+
+    @Override
+    public void limparContainer() {
+        SwingSingleton.getInstance().getContainerConteudo().removeAll();
+    }
+
+    @Override
+    public void setContainerConteudo(JPanel painel) {
+        limparContainer();
+        SwingSingleton.getInstance().getContainerConteudo().add(painel);
+        SwingSingleton.getInstance().getPainelConteudo().updateUI();
     }
 
     @Override
