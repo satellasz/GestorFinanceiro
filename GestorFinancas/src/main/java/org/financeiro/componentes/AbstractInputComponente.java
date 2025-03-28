@@ -17,6 +17,7 @@ public abstract class AbstractInputComponente {
     protected String labelCampo;
     protected boolean isObrigatorio;
     protected TipoCampoTexto tipoCampoTexto = TipoCampoTexto.TEXTO;
+    protected Color colorLabel;
 
     protected AbstractInputComponente(TipoInputComponente tipoInputComponente, String labelCampo, TipoCampoTexto tipoCampoTexto, boolean isObrigatorio) {
         this.tipoInputComponente = tipoInputComponente;
@@ -39,11 +40,11 @@ public abstract class AbstractInputComponente {
         this.getPanel().setPreferredSize(new Dimension(400, altura));
     }
 
-    protected void addLabelCampo() {
+    protected void addLabelCampo(Color colorLabel) {
         JLabel label = new JLabel(labelCampo);
         label.setPreferredSize(new Dimension(150, 25));
         label.setFont(label.getFont().deriveFont(15f));
-        label.setForeground(Color.WHITE);
+        label.setForeground(colorLabel);
         this.getPanel().add(label, BorderLayout.WEST);
     }
 
@@ -85,4 +86,6 @@ public abstract class AbstractInputComponente {
     public String getLabelCampo() {
         return labelCampo;
     }
+
+
 }

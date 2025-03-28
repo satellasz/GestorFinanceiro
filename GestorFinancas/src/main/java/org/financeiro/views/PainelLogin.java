@@ -21,8 +21,8 @@ public class PainelLogin extends JPanel {
         this.setLayout(null);
         this.image = ImageSingleton.getInstance().getImage("Login");
 
-        CampoTexto campoTextoUsername = new CampoTexto(TipoInputComponente.LOGIN_USER, "Usuário: ", TipoCampoTexto.TEXTO, true);
-        CampoTexto campoTextoSenha = new CampoTexto(TipoInputComponente.LOGIN_SENHA, "Senha:", TipoCampoTexto.TEXTO, true);
+        CampoTexto campoTextoUsername = new CampoTexto(Color.WHITE, TipoInputComponente.LOGIN_USER, "Usuário: ", TipoCampoTexto.TEXTO, true);
+        CampoTexto campoTextoSenha = new CampoTexto(Color.WHITE, TipoInputComponente.LOGIN_SENHA, "Senha:", TipoCampoTexto.TEXTO, true);
 
         Formulario formulario = new Formulario(450, 250, 400, 100);
         formulario.addComponente(campoTextoUsername);

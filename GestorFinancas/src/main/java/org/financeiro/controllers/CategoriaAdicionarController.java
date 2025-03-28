@@ -3,6 +3,7 @@ package org.financeiro.controllers;
 import org.financeiro.componentes.Formulario;
 import org.financeiro.enums.TipoInputComponente;
 import org.financeiro.enums.TipoPainelMenu;
+import org.financeiro.exceptions.CampoInvalidoException;
 import org.financeiro.exceptions.CampoObrigatorioException;
 import org.financeiro.exceptions.DadoNaoEncontradoException;
 import org.financeiro.models.Categoria;
@@ -21,7 +22,7 @@ public class CategoriaAdicionarController extends AbstractController {
     @Override
     public void post(Formulario formulario) {
         try {
-            this.validateCamposObrigatorios(formulario);
+            this.validateCampos(formulario);
 
             String nome = this.formularioService.getInputComponente(TipoInputComponente.NOME_CATEGORIA, formulario);
             String descricao = this.formularioService.getInputComponente(TipoInputComponente.DESCRICAO_CATEGORIA, formulario);
@@ -42,6 +43,8 @@ public class CategoriaAdicionarController extends AbstractController {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Campo obrigatório", JOptionPane.ERROR_MESSAGE);
         } catch (DadoNaoEncontradoException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Não encontrado", JOptionPane.ERROR_MESSAGE);
+        } catch (CampoInvalidoException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Campo inválido", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

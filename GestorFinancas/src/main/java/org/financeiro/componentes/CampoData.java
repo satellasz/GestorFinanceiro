@@ -15,7 +15,19 @@ public class CampoData extends AbstractInputComponente {
 
         setLayoutPadrao(ALTURA_PADRAO_TEXT_FIELD);
 
-        addLabelCampo();
+        addLabelCampo(Color.BLACK);
+
+        addComponentePrincipal();
+
+        addLabelObrigatorio();
+    }
+
+    public CampoData(Color colorLabel, TipoInputComponente tipoInputComponente, String labelCampo, boolean isObrigatorio) {
+        super(tipoInputComponente, labelCampo, isObrigatorio);
+
+        setLayoutPadrao(ALTURA_PADRAO_TEXT_FIELD);
+
+        addLabelCampo(colorLabel);
 
         addComponentePrincipal();
 

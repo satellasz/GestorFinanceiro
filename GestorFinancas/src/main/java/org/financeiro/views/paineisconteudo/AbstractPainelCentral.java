@@ -27,7 +27,7 @@ public abstract class AbstractPainelCentral extends JPanel {
     protected final transient CategoriaService categoriaService = new CategoriaServiceImpl();
     protected final transient TransacaoService transacaoService = new TransacaoServiceImpl();
     protected final transient ImageService imageService = new ImageServiceImpl();
-    protected final transient Formulario formulario = new Formulario(Color.WHITE, 150, 50, 800, 500);
+    protected final transient Formulario formulario = new Formulario( 150, 50, 800, 500);
 
     protected AbstractPainelCentral() {
         this.setLayout(new BorderLayout());

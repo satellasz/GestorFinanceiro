@@ -14,7 +14,19 @@ public class CampoTextoArea extends AbstractInputComponente {
 
         setLayoutPadrao(ALTURA_PADRAO_TEXT_AREA);
 
-        addLabelCampo();
+        addLabelCampo(Color.BLACK);
+
+        addComponentePrincipal();
+
+        addLabelObrigatorio();
+    }
+
+    public CampoTextoArea(Color colorLabel, TipoInputComponente tipoInputComponente, String label, TipoCampoTexto tipoCampoTexto, boolean isObrigatorio) {
+        super(tipoInputComponente, label, tipoCampoTexto, isObrigatorio);
+
+        setLayoutPadrao(ALTURA_PADRAO_TEXT_AREA);
+
+        addLabelCampo(colorLabel);
 
         addComponentePrincipal();
 

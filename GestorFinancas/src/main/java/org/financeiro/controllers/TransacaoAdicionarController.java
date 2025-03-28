@@ -9,12 +9,10 @@ import org.financeiro.exceptions.CampoObrigatorioException;
 import org.financeiro.exceptions.DadoNaoEncontradoException;
 import org.financeiro.models.Categoria;
 import org.financeiro.models.Transacao;
-import org.financeiro.utils.Utils;
 import org.financeiro.views.paineisconteudo.PainelAdicionarTransacao;
 import org.financeiro.views.paineisconteudo.PainelListaTransacoes;
 
 import javax.swing.*;
-import java.time.LocalDate;
 
 public class TransacaoAdicionarController extends AbstractController {
     @Override
@@ -26,8 +24,7 @@ public class TransacaoAdicionarController extends AbstractController {
     @Override
     public void post(Formulario formulario) {
         try {
-            this.validateCamposObrigatorios(formulario);
-            this.validateCamposNumericos(formulario);
+            this.validateCampos(formulario);
 
             double valor = Double.parseDouble(this.formularioService.getInputComponente(TipoInputComponente.VALOR_TRANSACAO, formulario));
             String descricao = this.formularioService.getInputComponente(TipoInputComponente.DESCRICAO_CATEGORIA, formulario);

@@ -1,5 +1,6 @@
 package org.financeiro.services.usuario;
 
+import org.financeiro.exceptions.CadastroContaException;
 import org.financeiro.exceptions.DadoNaoEncontradoException;
 import org.financeiro.models.Usuario;
 import org.financeiro.repositories.usuario.UsuarioRepository;
@@ -12,8 +13,16 @@ public class UsuarioServiceImpl implements UsuarioService {
     private final UsuarioRepository usuarioRepository = new UsuarioRepositoryImpl();
 
     @Override
-    public void cadastrarUsuario(Usuario usuario) {
-        this.usuarioRepository.cadastrarUsuario(usuario);
+    public void cadastrarUsuario(Usuario usuario) throws CadastroContaException {
+        Usuario usuarioEncontrado = this.usuarioRepository.buscarUsuario(usuario.getNome());
+        
+        if (usuarioEncontrado != null) {
+            throw new CadastroContaException("Já existe um usuário com este nome");
+        }
+
+        Usuario novoUsuario = new Usuario(this.getIdUltimoUsuario() + 1, usuario.getNome(), usuario.getEmail(), usuario.getSenha());
+        
+        this.usuarioRepository.cadastrarUsuario(novoUsuario);
     }
 
     @Override
@@ -45,14 +54,28 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario buscarUsuario(Usuario usuario) throws DadoNaoEncontradoException {
         Usuario usuarioEncontrado = this.usuarioRepository.buscarUsuario(usuario.getNome());
 
-        if (usuarioEncontrado == null) {
-            throw new DadoNaoEncontradoException("Usuário não foi encontrado");
-        }
-
-        if (!Objects.equals(usuarioEncontrado.getSenha(), usuario.getSenha())) {
-            throw new DadoNaoEncontradoException("Senha incorreta");
+        if (usuarioEncontrado == null || !Objects.equals(usuarioEncontrado.getSenha(), usuario.getSenha())) {
+            throw new DadoNaoEncontradoException("Usuário não encontrado ou senha incorreta");
         }
 
         return usuarioEncontrado;
+    }
+
+    @Override
+    public boolean validarSenhar(String senha, String confirmarSenha) {
+        return senha.trim().equals(confirmarSenha.trim());
+    }
+
+    @Override
+    public int getIdUltimoUsuario() {
+        List<Usuario> usuarios = this.listarUsuarios();
+
+        if (usuarios.isEmpty()) {
+            return 0;
+        }
+
+        Usuario transacao = usuarios.getLast();
+
+        return transacao.getId();
     }
 }

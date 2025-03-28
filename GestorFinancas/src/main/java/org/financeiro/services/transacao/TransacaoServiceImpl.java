@@ -51,13 +51,13 @@ public class TransacaoServiceImpl implements TransacaoService {
 
     @Override
     public int getIdUltimaTransacao() {
-        List<Transacao> transacoes = listarTransacoes();
+        List<Transacao> transacoes = this.listarTransacoes();
 
         if (transacoes.isEmpty()) {
             return 0;
         }
 
-        Transacao transacao = this.transacaoRepository.listarTransacoes().getLast();
+        Transacao transacao = transacoes.getLast();
 
         return transacao.getId();
     }

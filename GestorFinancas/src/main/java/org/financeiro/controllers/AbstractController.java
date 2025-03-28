@@ -38,20 +38,12 @@ public abstract class AbstractController {
 
     }
 
-    public void patch(int id, Formulario formulario) {
-
-    }
-
-    public void validateCamposObrigatorios(Formulario formulario) throws CampoObrigatorioException {
+    public void validateCampos(Formulario formulario) throws CampoObrigatorioException, CampoInvalidoException {
         for (var component : formulario.getComponentes()) {
             if (component.isObrigatorio() && (Utils.isStringVazia(component.getInput()))) {
                 throw new CampoObrigatorioException("Campo '" + component.getLabelCampo() + "' é obrigatório. Por favor, preencha-o.");
             }
-        }
-    }
 
-    public void validateCamposNumericos(Formulario formulario) throws CampoInvalidoException {
-        for (var component : formulario.getComponentes()) {
             if (!Utils.isStringVazia(component.getInput()) && component.getTipoCampoTexto() == TipoCampoTexto.NUMERO && !Utils.isNumero(component.getInput())) {
                 throw new CampoInvalidoException("Campo '" + component.getLabelCampo() + "' é númerico. Por favor, preencha-o corretamente.");
             }

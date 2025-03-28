@@ -5,7 +5,6 @@ import org.financeiro.enums.TipoPainelMenu;
 import org.financeiro.exceptions.DadoNaoEncontradoException;
 import org.financeiro.models.Categoria;
 import org.financeiro.models.Transacao;
-import org.financeiro.views.paineisconteudo.PainelAdicionarCategoria;
 import org.financeiro.views.paineisconteudo.PainelAdicionarTransacao;
 import org.financeiro.views.paineisconteudo.PainelListaTransacoes;
 

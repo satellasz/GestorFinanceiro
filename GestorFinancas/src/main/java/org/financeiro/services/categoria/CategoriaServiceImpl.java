@@ -76,13 +76,13 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     public int getIdUltimaCategoria() {
-        List<Categoria> categorias = listarCategorias();
+        List<Categoria> categorias = this.listarCategorias();
 
         if (categorias.isEmpty()) {
             return 0;
         }
 
-        Categoria categoria = categoriaRepository.listarCategorias().getLast();
+        Categoria categoria = categorias.getLast();
 
         return categoria.getId();
     }

@@ -13,7 +13,19 @@ public class ComboBox extends AbstractInputComponente {
 
         setLayoutPadrao(ALTURA_PADRAO_TEXT_FIELD);
 
-        addLabelCampo();
+        addLabelCampo(Color.BLACK);
+
+        addComponentePrincipal();
+
+        addLabelObrigatorio();
+    }
+
+    public ComboBox(Color colorLabel, TipoInputComponente tipoInputComponente, String label, boolean isObrigatorio) {
+        super(tipoInputComponente, label, isObrigatorio);
+
+        setLayoutPadrao(ALTURA_PADRAO_TEXT_FIELD);
+
+        addLabelCampo(colorLabel);
 
         addComponentePrincipal();
 
