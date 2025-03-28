@@ -11,4 +11,6 @@ public interface UsuarioRepository {
     void alterarUsuario(Usuario usuario);
     Usuario buscarUsuario(int id);
     Usuario buscarUsuarioLogado();
+    Usuario buscarUsuario(String login);
+    void setUsuarioLogado(Usuario usuario);
 }

@@ -4,6 +4,7 @@ import org.financeiro.enums.TipoCampoTexto;
 import org.financeiro.enums.TipoInputComponente;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class CampoTexto extends AbstractInputComponente {
@@ -31,6 +32,8 @@ public class CampoTexto extends AbstractInputComponente {
         this.textField = new JTextField();
         this.textField.setName(tipoInputComponente.getId());
         this.textField.setPreferredSize(new Dimension(LARGURA_PADRAO_PAINEL, ALTURA_PADRAO_TEXT_FIELD));
+        this.textField.setBorder(new EmptyBorder(0, 5, 0, 0));
+        this.textField.setFont(this.textField.getFont().deriveFont(15f));
 
         this.getPanel().add(this.textField, BorderLayout.CENTER);
     }

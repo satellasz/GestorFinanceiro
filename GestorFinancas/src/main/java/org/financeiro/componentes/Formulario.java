@@ -1,6 +1,8 @@
 package org.financeiro.componentes;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +11,19 @@ public class Formulario {
     private final JPanel jPanel;
     private int idObjeto;
 
+    public Formulario(Color color, int dimensionX, int dimensionY, int width, int height) {
+        this.componentes = new ArrayList<>();
+        this.jPanel = new JPanel();
+        this.jPanel.setBackground(color);
+        this.jPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
+        this.jPanel.setBounds(dimensionX, dimensionY, width, height);
+    }
+
     public Formulario(int dimensionX, int dimensionY, int width, int height) {
         this.componentes = new ArrayList<>();
         this.jPanel = new JPanel();
+        this.jPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
+        this.jPanel.setOpaque(false);
         this.jPanel.setBounds(dimensionX, dimensionY, width, height);
     }
 

@@ -22,17 +22,23 @@ public class PainelServiceImpl implements PainelService {
 
     @Override
     public void setContainerConteudo(JPanel painel) {
-        limparContainer();
-        SwingSingleton.getInstance().getContainerConteudo().add(painel);
-        SwingSingleton.getInstance().getPainelConteudo().updateUI();
+        SwingUtilities.invokeLater(() -> {
+            limparContainer();
+            SwingSingleton.getInstance().getContainerConteudo().add(painel);
+            SwingSingleton.getInstance().getContainerConteudo().revalidate();
+            SwingSingleton.getInstance().getContainerConteudo().repaint();
+        });
     }
 
     @Override
     public void setPainelConteudo(AbstractPainelCentral abstractPainelCentral) {
-        limparPainelConteudo();
-        SwingSingleton.getInstance().getPainelConteudo().add(abstractPainelCentral);
-        abstractPainelCentral.onLoad();
-        SwingSingleton.getInstance().getPainelConteudo().updateUI();
+        SwingUtilities.invokeLater(() -> {
+            limparPainelConteudo();
+            SwingSingleton.getInstance().getPainelConteudo().add(abstractPainelCentral);
+            abstractPainelCentral.onLoad();
+            SwingSingleton.getInstance().getPainelConteudo().revalidate();
+            SwingSingleton.getInstance().getPainelConteudo().repaint();
+        });
     }
 
     @Override

@@ -4,6 +4,7 @@ import org.financeiro.enums.TipoCampoTexto;
 import org.financeiro.enums.TipoInputComponente;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public abstract class AbstractInputComponente {
@@ -22,6 +23,7 @@ public abstract class AbstractInputComponente {
         this.tipoCampoTexto = tipoCampoTexto;
         this.isObrigatorio = isObrigatorio;
         this.labelCampo = labelCampo;
+
     }
 
     protected AbstractInputComponente(TipoInputComponente tipoInputComponente, String labelCampo, boolean isObrigatorio) {
@@ -32,12 +34,16 @@ public abstract class AbstractInputComponente {
 
     protected void setLayoutPadrao(int altura) {
         this.getPanel().setLayout(new BorderLayout(2, 10));
+        this.getPanel().setOpaque(false);
+        this.getPanel().setBorder(new EmptyBorder(0, 15, 0, 15));
         this.getPanel().setPreferredSize(new Dimension(400, altura));
     }
 
     protected void addLabelCampo() {
         JLabel label = new JLabel(labelCampo);
         label.setPreferredSize(new Dimension(150, 25));
+        label.setFont(label.getFont().deriveFont(15f));
+        label.setForeground(Color.WHITE);
         this.getPanel().add(label, BorderLayout.WEST);
     }
 

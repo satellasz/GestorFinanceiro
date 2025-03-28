@@ -12,6 +12,10 @@ import org.financeiro.services.categoria.CategoriaService;
 import org.financeiro.services.categoria.CategoriaServiceImpl;
 import org.financeiro.services.transacao.TransacaoService;
 import org.financeiro.services.transacao.TransacaoServiceImpl;
+import org.financeiro.services.usuario.LoginService;
+import org.financeiro.services.usuario.LoginServiceImpl;
+import org.financeiro.services.usuario.UsuarioService;
+import org.financeiro.services.usuario.UsuarioServiceImpl;
 import org.financeiro.utils.Utils;
 
 public abstract class AbstractController {
@@ -19,6 +23,8 @@ public abstract class AbstractController {
     protected final FormularioService formularioService = new FormularioServiceImpl();
     protected final CategoriaService categoriaService = new CategoriaServiceImpl();
     protected final TransacaoService transacaoService = new TransacaoServiceImpl();
+    protected final UsuarioService usuarioService = new UsuarioServiceImpl();
+    protected final LoginService loginService = new LoginServiceImpl();
 
     public abstract void get();
 

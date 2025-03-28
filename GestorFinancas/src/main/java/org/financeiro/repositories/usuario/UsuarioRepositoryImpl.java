@@ -1,7 +1,6 @@
 package org.financeiro.repositories.usuario;
 
 import org.financeiro.models.Usuario;
-import org.financeiro.models.Usuario;
 import org.financeiro.singletons.UsuarioSingleton;
 
 import java.util.List;
@@ -35,5 +34,15 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     @Override
     public Usuario buscarUsuarioLogado() {
         return UsuarioSingleton.getInstance().getUsuarioLogado();
+    }
+
+    @Override
+    public Usuario buscarUsuario(String login) {
+        return UsuarioSingleton.getInstance().getUsuarios().stream().filter(x -> x.getNome().equals(login)).findFirst().orElse(null);
+    }
+
+    @Override
+    public void setUsuarioLogado(Usuario usuario) {
+        UsuarioSingleton.getInstance().setUsuarioLogado(usuario);
     }
 }

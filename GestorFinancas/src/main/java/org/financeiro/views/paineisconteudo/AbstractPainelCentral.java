@@ -14,12 +14,12 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public abstract class AbstractPainelCentral extends JPanel {
-    protected final TransacaoAdicionarController transacaoAdicionarController = new TransacaoAdicionarController();
-    protected final TransacoesController transacoesController = new TransacoesController();
-    protected final CategoriasController categoriasController = new CategoriasController();
-    protected final CategoriaAdicionarController categoriaAdicionarController = new CategoriaAdicionarController();
-    protected final ResumoController resumoController = new ResumoController();
-    protected final PerfilController perfilController = new PerfilController();
+    protected final transient TransacaoAdicionarController transacaoAdicionarController = new TransacaoAdicionarController();
+    protected final transient TransacoesController transacoesController = new TransacoesController();
+    protected final transient CategoriasController categoriasController = new CategoriasController();
+    protected final transient CategoriaAdicionarController categoriaAdicionarController = new CategoriaAdicionarController();
+    protected final transient ResumoController resumoController = new ResumoController();
+    protected final transient PerfilController perfilController = new PerfilController();
     protected static final int ALTURA_PAINEL_CIMA = 250;
     protected static final int ALTURA_PAINEL_BAIXO = 473;
     protected JPanel painelCima;
@@ -27,7 +27,7 @@ public abstract class AbstractPainelCentral extends JPanel {
     protected final transient CategoriaService categoriaService = new CategoriaServiceImpl();
     protected final transient TransacaoService transacaoService = new TransacaoServiceImpl();
     protected final transient ImageService imageService = new ImageServiceImpl();
-    protected final transient Formulario formulario = new Formulario(150, 50, 800, 500);
+    protected final transient Formulario formulario = new Formulario(Color.WHITE, 150, 50, 800, 500);
 
     protected AbstractPainelCentral() {
         this.setLayout(new BorderLayout());

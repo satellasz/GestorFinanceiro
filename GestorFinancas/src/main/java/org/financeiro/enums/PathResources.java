@@ -8,7 +8,8 @@ public enum PathResources {
     ICON_PAINEL_TRANSACOES(TRANSACOES.getNome(), "/icons/transacoes.png"),
     ICON_CATEGORIAS(CATEGORIAS.getNome(), "/icons/category.png"),
     ICON_RESUMO(RESUMO.getNome(), "/icons/resumo.png"),
-    ICON_PERFIL(PERFIL.getNome(), "");
+    ICON_PERFIL(PERFIL.getNome(), ""),
+    BACKGROUND_LOGIN ("Login", "/imagens/background_login.jpg");
 
     private final String path;
     private final String nome;
