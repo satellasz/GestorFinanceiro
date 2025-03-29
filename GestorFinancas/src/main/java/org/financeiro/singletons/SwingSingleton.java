@@ -10,6 +10,7 @@ import java.util.List;
 public class SwingSingleton {
     private static SwingSingleton instance = null;
     private final FramePrincipal framePrincipal;
+    private PainelMenu painelMenuAtual;
 
     private SwingSingleton() {
         framePrincipal = new FramePrincipal();
@@ -28,8 +29,8 @@ public class SwingSingleton {
         return framePrincipal.getPainelPrincipal().getPainelConteudo();
     }
 
-    public List<PainelMenu> getPaineisTransicao() {
-        return framePrincipal.getPainelPrincipal().getPaineisTransicao();
+    public List<PainelMenu> getPaineisMenu() {
+        return framePrincipal.getPainelPrincipal().getPaineisMenu();
     }
 
     public Container getContainerConteudo() {
@@ -38,5 +39,13 @@ public class SwingSingleton {
 
     public JPanel getPainelPrincipal() {
         return framePrincipal.getPainelPrincipal();
+    }
+
+    public PainelMenu getPainelMenuAtual() {
+        return painelMenuAtual;
+    }
+
+    public void setPainelMenuAtual(PainelMenu painelMenuAtual) {
+        this.painelMenuAtual = painelMenuAtual;
     }
 }

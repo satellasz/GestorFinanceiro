@@ -4,6 +4,7 @@ import org.financeiro.exceptions.DadoNaoEncontradoException;
 import org.financeiro.models.Categoria;
 import org.financeiro.models.Transacao;
 import org.financeiro.services.categoria.CategoriaService;
+import org.financeiro.utils.Utils;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
@@ -43,7 +44,7 @@ public class TransacaoModelTabela extends AbstractTableModel {
                 case 2 -> transacao.getDescricao();
                 case 3 -> categoria != null ? categoria.getNome() : "";
                 case 4 -> transacao.getClassificacao().getNome();
-                case 5 -> transacao.getDataTransacao();
+                case 5 -> Utils.getData(transacao.getDataTransacao());
                 case 6 -> "Editar";
                 case 7 -> "Excluir";
                 default -> "";

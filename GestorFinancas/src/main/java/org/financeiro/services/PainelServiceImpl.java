@@ -13,6 +13,8 @@ public class PainelServiceImpl implements PainelService {
     @Override
     public void limparPainelConteudo() {
         SwingSingleton.getInstance().getPainelConteudo().removeAll();
+
+        System.gc();
     }
 
     @Override
@@ -35,15 +37,15 @@ public class PainelServiceImpl implements PainelService {
         SwingUtilities.invokeLater(() -> {
             limparPainelConteudo();
             SwingSingleton.getInstance().getPainelConteudo().add(abstractPainelCentral);
-            abstractPainelCentral.onLoad();
             SwingSingleton.getInstance().getPainelConteudo().revalidate();
             SwingSingleton.getInstance().getPainelConteudo().repaint();
+            abstractPainelCentral.onLoad();
         });
     }
 
     @Override
     public void setBorderPainelTransicao(PainelMenu painelMenu) {
-        for (PainelMenu painel : SwingSingleton.getInstance().getPaineisTransicao()) {
+        for (PainelMenu painel : SwingSingleton.getInstance().getPaineisMenu()) {
             if (painel == painelMenu) {
                 painel.setBorder(new LineBorder(Color.DARK_GRAY, 2, true));
             } else {
@@ -53,7 +55,26 @@ public class PainelServiceImpl implements PainelService {
     }
 
     @Override
-    public PainelMenu getPainelTransicao(TipoPainelMenu tipoPainelMenu) {
-        return SwingSingleton.getInstance().getPaineisTransicao().stream().filter(x -> x.getTipoPainelTransicao() == tipoPainelMenu).findFirst().orElse(null);
+    public PainelMenu getPainelMenu(TipoPainelMenu tipoPainelMenu) {
+        return SwingSingleton.getInstance().getPaineisMenu().stream().filter(x -> x.getTipoPainelMenu() == tipoPainelMenu).findFirst().orElse(null);
+    }
+
+    @Override
+    public PainelMenu getPainelMenuAtual() {
+        return SwingSingleton.getInstance().getPainelMenuAtual();
+    }
+
+    @Override
+    public void setPainelMenuAtual(PainelMenu painelMenu) {
+        SwingSingleton.getInstance().setPainelMenuAtual(painelMenu);
+    }
+
+    @Override
+    public boolean isPainelMenuAtualDiferente(PainelMenu painelMenu) {
+        PainelMenu painelMenuAtual = getPainelMenuAtual();
+
+        if (painelMenuAtual == null) return true;
+
+        return painelMenuAtual.getTipoPainelMenu() != painelMenu.getTipoPainelMenu();
     }
 }

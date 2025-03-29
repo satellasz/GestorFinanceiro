@@ -8,7 +8,7 @@ public class PerfilController extends AbstractController {
     @Override
     public void get() {
         painelService.setPainelConteudo(new PainelPerfil());
-        painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelMenu.PERFIL));
+        painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.PERFIL));
     }
 
     @Override

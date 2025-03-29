@@ -11,10 +11,10 @@ public class Transacao {
     private double valor;
     private int idCategoria;
     private ClassificacaoTransacao classificacao;
-    private Usuario usuario;
-    private String dataTransacao;
+    private final Usuario usuario;
+    private LocalDate dataTransacao;
 
-    public Transacao(double valor, String descricao, int idCategoria, ClassificacaoTransacao classificacao, Usuario usuario, String dataTransacao) {
+    public Transacao(double valor, String descricao, int idCategoria, ClassificacaoTransacao classificacao, Usuario usuario, LocalDate dataTransacao) {
         this.descricao = descricao;
         this.valor = valor;
         this.idCategoria = idCategoria;
@@ -23,7 +23,7 @@ public class Transacao {
         this.dataTransacao = dataTransacao;
     }
 
-    public Transacao(int id, double valor, String descricao, int idCategoria, ClassificacaoTransacao classificacao, Usuario usuario, String dataTransacao) {
+    public Transacao(int id, double valor, String descricao, int idCategoria, ClassificacaoTransacao classificacao, Usuario usuario, LocalDate dataTransacao) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
@@ -65,7 +65,7 @@ public class Transacao {
         this.classificacao = classificacao;
     }
 
-    public String getDataTransacao() {
+    public LocalDate getDataTransacao() {
         return dataTransacao;
     }
 

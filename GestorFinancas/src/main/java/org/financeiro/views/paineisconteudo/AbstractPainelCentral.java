@@ -1,16 +1,13 @@
 package org.financeiro.views.paineisconteudo;
 
+import org.financeiro.componentes.Botao;
 import org.financeiro.componentes.Formulario;
 import org.financeiro.controllers.*;
-import org.financeiro.services.ImageService;
-import org.financeiro.services.ImageServiceImpl;
+import org.financeiro.listeners.GetActionListener;
 import org.financeiro.services.categoria.CategoriaService;
 import org.financeiro.services.categoria.CategoriaServiceImpl;
-import org.financeiro.services.transacao.TransacaoService;
-import org.financeiro.services.transacao.TransacaoServiceImpl;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public abstract class AbstractPainelCentral extends JPanel {
@@ -25,9 +22,7 @@ public abstract class AbstractPainelCentral extends JPanel {
     protected JPanel painelCima;
     protected JPanel painelBaixo;
     protected final transient CategoriaService categoriaService = new CategoriaServiceImpl();
-    protected final transient TransacaoService transacaoService = new TransacaoServiceImpl();
-    protected final transient ImageService imageService = new ImageServiceImpl();
-    protected final transient Formulario formulario = new Formulario( 150, 50, 800, 500);
+    protected final transient Formulario formulario = new Formulario(150, 50, 800, 500);
 
     protected AbstractPainelCentral() {
         this.setLayout(new BorderLayout());
@@ -40,7 +35,6 @@ public abstract class AbstractPainelCentral extends JPanel {
         JPanel painel = new JPanel();
         painel.setPreferredSize(new Dimension(0, ALTURA_PAINEL_CIMA));
         painel.setLayout(null);
-        painel.setBorder(new LineBorder(Color.black, 2));
         this.painelCima = painel;
 
         return painel;
@@ -50,10 +44,20 @@ public abstract class AbstractPainelCentral extends JPanel {
         JPanel painel = new JPanel();
         painel.setPreferredSize(new Dimension(0, ALTURA_PAINEL_BAIXO));
         painel.setLayout(null);
-        painel.setBorder(new LineBorder(Color.black, 2));
         this.painelBaixo = painel;
 
         return painel;
+    }
+
+    protected JPanel getPainelAdicionar(AbstractController controller) {
+        JPanel painelAdicionar = new JPanel();
+        painelAdicionar.setLayout(null);
+        Botao botaoAdcionar = new Botao(new GetActionListener(controller));
+        botaoAdcionar.setBounds(375, 175, 125, 50);
+        botaoAdcionar.setText("Adicionar");
+        painelAdicionar.add(botaoAdcionar);
+
+        return painelAdicionar;
     }
 
     protected void customizarPainelCima() {

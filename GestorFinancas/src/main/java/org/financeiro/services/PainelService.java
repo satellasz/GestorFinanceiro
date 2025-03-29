@@ -12,5 +12,8 @@ public interface PainelService {
     void setContainerConteudo(JPanel painel);
     void setPainelConteudo(AbstractPainelCentral abstractPainelCentral);
     void setBorderPainelTransicao(PainelMenu painelMenu);
-    PainelMenu getPainelTransicao(TipoPainelMenu tipoPainelMenu);
+    PainelMenu getPainelMenu(TipoPainelMenu tipoPainelMenu);
+    PainelMenu getPainelMenuAtual();
+    void setPainelMenuAtual(PainelMenu painelMenu);
+    boolean isPainelMenuAtualDiferente(PainelMenu painelMenu);
 }

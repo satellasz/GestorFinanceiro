@@ -16,7 +16,7 @@ public class CategoriaAdicionarController extends AbstractController {
     @Override
     public void get() {
         painelService.setPainelConteudo(new PainelAdicionarCategoria());
-        painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelMenu.CATEGORIAS));
+        painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.CATEGORIAS));
     }
 
     @Override
@@ -38,7 +38,7 @@ public class CategoriaAdicionarController extends AbstractController {
             }
 
             painelService.setPainelConteudo(new PainelListaCategorias());
-            painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelMenu.CATEGORIAS));
+            painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.CATEGORIAS));
         } catch (CampoObrigatorioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Campo obrigatório", JOptionPane.ERROR_MESSAGE);
         } catch (DadoNaoEncontradoException e) {

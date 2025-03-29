@@ -8,7 +8,7 @@ public class ResumoController extends AbstractController {
     @Override
     public void get() {
         painelService.setPainelConteudo(new PainelResumoFinanceiro());
-        painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelMenu.RESUMO));
+        painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.RESUMO));
     }
 
     @Override

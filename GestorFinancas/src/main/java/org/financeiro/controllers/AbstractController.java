@@ -25,6 +25,7 @@ public abstract class AbstractController {
     protected final TransacaoService transacaoService = new TransacaoServiceImpl();
     protected final UsuarioService usuarioService = new UsuarioServiceImpl();
     protected final LoginService loginService = new LoginServiceImpl();
+    public static final String TODAS = "TODAS";
 
     public abstract void get();
 

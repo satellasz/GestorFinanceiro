@@ -16,10 +16,6 @@ import java.awt.*;
 public class PainelAdicionarTransacao extends AbstractPainelCentral {
     private transient Transacao transacao = null;
     private transient Categoria categoria = null;
-    @Override
-    public void onLoad() {
-        this.add(getPainelAdicionarTransacao(), BorderLayout.CENTER);
-    }
 
     public PainelAdicionarTransacao(Transacao transacao, Categoria categoria) {
         this.transacao = transacao;
@@ -29,14 +25,19 @@ public class PainelAdicionarTransacao extends AbstractPainelCentral {
     public PainelAdicionarTransacao() {
     }
 
+    @Override
+    public void onLoad() {
+        this.add(getPainelAdicionarTransacao(), BorderLayout.CENTER);
+    }
+
     private JPanel getPainelAdicionarTransacao() {
         JPanel painel = new JPanel();
         painel.setLayout(null);
         painel.setBorder(new LineBorder(Color.black, 2));
 
         CampoTexto campoTextoValor = new CampoTexto(TipoInputComponente.VALOR_TRANSACAO, "Valor da transação", TipoCampoTexto.NUMERO, true);
-        ComboBox comboBoxCategoria = new ComboBox(TipoInputComponente.TRANSACAO_CATEGORIA,"Categoria", true);
-        ComboBox comboBoxClassificacao = new ComboBox(TipoInputComponente.CLASSFICACAO_TRANSACAO,"Classificação", true);
+        ComboBox comboBoxCategoria = new ComboBox(TipoInputComponente.TRANSACAO_CATEGORIA, "Categoria", true);
+        ComboBox comboBoxClassificacao = new ComboBox(TipoInputComponente.CLASSFICACAO_TRANSACAO, "Classificação", true);
         CampoTextoArea campoTextoDescricao = new CampoTextoArea(TipoInputComponente.DESCRICAO_CATEGORIA, "Descrição", TipoCampoTexto.TEXTO, false);
         CampoData campoData = new CampoData(TipoInputComponente.DATA_TRANSACAO, "Data", true);
 
@@ -53,7 +54,7 @@ public class PainelAdicionarTransacao extends AbstractPainelCentral {
             comboBoxCategoria.setInput(this.categoria.getNome());
             comboBoxClassificacao.setInput(this.transacao.getClassificacao().getNome());
             campoTextoDescricao.setInput(this.transacao.getDescricao());
-            campoData.setInput(transacao.getDataTransacao());
+            campoData.setInput(Utils.getData(transacao.getDataTransacao()));
             this.formulario.setIdObjeto(transacao.getId());
         }
 

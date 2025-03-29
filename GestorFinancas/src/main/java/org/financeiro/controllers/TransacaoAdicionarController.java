@@ -9,8 +9,8 @@ import org.financeiro.exceptions.CampoObrigatorioException;
 import org.financeiro.exceptions.DadoNaoEncontradoException;
 import org.financeiro.models.Categoria;
 import org.financeiro.models.Transacao;
+import org.financeiro.utils.Utils;
 import org.financeiro.views.paineisconteudo.PainelAdicionarTransacao;
-import org.financeiro.views.paineisconteudo.PainelListaTransacoes;
 
 import javax.swing.*;
 
@@ -18,7 +18,7 @@ public class TransacaoAdicionarController extends AbstractController {
     @Override
     public void get() {
         painelService.setPainelConteudo(new PainelAdicionarTransacao());
-        painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelMenu.TRANSACOES));
+        painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.TRANSACOES));
     }
 
     @Override
@@ -35,17 +35,16 @@ public class TransacaoAdicionarController extends AbstractController {
             Categoria categoria = this.categoriaService.buscarCategoria(categoriaNome);
 
             if (formulario.getIdObjeto() <= 0) {
-                Transacao transacao = new Transacao(valor, descricao, categoria.getId(), ClassificacaoTransacao.buscarClassificacao(classificacao), null, dataTransacao);
+                Transacao transacao = new Transacao(valor, descricao, categoria.getId(), ClassificacaoTransacao.buscarClassificacao(classificacao), null, Utils.getData(dataTransacao));
 
                 this.transacaoService.cadastrarTransacao(transacao);
             } else {
-                Transacao transacao = new Transacao(formulario.getIdObjeto(), valor, descricao, categoria.getId(), ClassificacaoTransacao.buscarClassificacao(classificacao), null, dataTransacao);
+                Transacao transacao = new Transacao(formulario.getIdObjeto(), valor, descricao, categoria.getId(), ClassificacaoTransacao.buscarClassificacao(classificacao), null, Utils.getData(dataTransacao));
 
                 this.transacaoService.alterarTransacao(transacao);
             }
 
-            painelService.setPainelConteudo(new PainelListaTransacoes());
-            painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelMenu.TRANSACOES));
+            new TransacoesController().get();
         } catch (CampoObrigatorioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Campo obrigatório", JOptionPane.ERROR_MESSAGE);
         } catch (CampoInvalidoException e) {

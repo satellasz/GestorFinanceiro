@@ -24,7 +24,7 @@ public class PainelMenu extends JPanel {
         this.setBackground(cor);
         setBorderNormal();
 
-        this.addMouseListener(new MenuActionListener(abstractController));
+        this.addMouseListener(new MenuActionListener(abstractController, this));
         this.borderTop = borderTop;
         this.borderBottom = borderBottom;
         this.tipoPainelMenu = tipoPainelMenu;
@@ -35,7 +35,7 @@ public class PainelMenu extends JPanel {
         this.setBorder(BorderFactory.createMatteBorder(borderTop, 0, borderBottom, 1, Color.BLACK));
     }
 
-    public TipoPainelMenu getTipoPainelTransicao() {
+    public TipoPainelMenu getTipoPainelMenu() {
         return tipoPainelMenu;
     }
 

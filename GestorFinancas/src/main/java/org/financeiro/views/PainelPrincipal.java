@@ -13,7 +13,7 @@ import java.util.List;
 
 public class PainelPrincipal extends JPanel {
     private final JPanel painelConteudo;
-    private final List<PainelMenu> paineisTransicao = new ArrayList<>();
+    private final List<PainelMenu> paineisMenu = new ArrayList<>();
 
     public PainelPrincipal() {
         this.setLayout(new BorderLayout());
@@ -31,7 +31,7 @@ public class PainelPrincipal extends JPanel {
         painelTransicao.add(painelPerfil);
 
         for (Component p : painelTransicao.getComponents()) {
-            paineisTransicao.add((PainelMenu) p);
+            paineisMenu.add((PainelMenu) p);
         }
 
         painelConteudo = new JPanel();
@@ -45,7 +45,7 @@ public class PainelPrincipal extends JPanel {
         return painelConteudo;
     }
 
-    public List<PainelMenu> getPaineisTransicao() {
-        return paineisTransicao;
+    public List<PainelMenu> getPaineisMenu() {
+        return paineisMenu;
     }
 }

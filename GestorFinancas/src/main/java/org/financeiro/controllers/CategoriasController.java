@@ -15,7 +15,7 @@ public class CategoriasController extends AbstractController {
     @Override
     public void get() {
         painelService.setPainelConteudo(new PainelListaCategorias());
-        painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelMenu.CATEGORIAS));
+        painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.CATEGORIAS));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class CategoriasController extends AbstractController {
             Categoria categoria = this.categoriaService.buscarCategoria(id);
 
             painelService.setPainelConteudo(new PainelAdicionarCategoria(categoria));
-            painelService.setBorderPainelTransicao(painelService.getPainelTransicao(TipoPainelMenu.CATEGORIAS));
+            painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.CATEGORIAS));
         } catch (DadoNaoEncontradoException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Não encontrado", JOptionPane.ERROR_MESSAGE);
         }

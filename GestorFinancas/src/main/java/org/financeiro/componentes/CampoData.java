@@ -1,15 +1,20 @@
 package org.financeiro.componentes;
 
 import org.financeiro.enums.TipoInputComponente;
+import org.financeiro.exceptions.CampoInvalidoException;
+import org.financeiro.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class CampoData extends AbstractInputComponente {
-    private  JSpinner dateSpinner;
+    private JSpinner dateSpinner;
+
     public CampoData(TipoInputComponente tipoInputComponente, String labelCampo, boolean isObrigatorio) {
         super(tipoInputComponente, labelCampo, isObrigatorio);
 
@@ -58,12 +63,12 @@ public class CampoData extends AbstractInputComponente {
 
     @Override
     public void setInput(String input) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            Date date = sdf.parse(input);
-            dateSpinner.setValue(date);
-        } catch (ParseException e) {
-            System.out.println("Erro ao converter a data: " + e.getMessage());
+            LocalDate localDate = Utils.getData(input);
+            Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            this.dateSpinner.setValue(date);
+        } catch (CampoInvalidoException e) {
+            this.dateSpinner.setValue(null);
         }
     }
 }

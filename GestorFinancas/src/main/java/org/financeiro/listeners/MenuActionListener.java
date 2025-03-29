@@ -1,15 +1,22 @@
 package org.financeiro.listeners;
 
 import org.financeiro.controllers.AbstractController;
+import org.financeiro.services.PainelService;
+import org.financeiro.services.PainelServiceImpl;
+import org.financeiro.singletons.SwingSingleton;
+import org.financeiro.views.PainelMenu;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class MenuActionListener implements MouseListener {
     private final AbstractController abstractController;
+    private final PainelMenu painelMenu;
+    private final PainelService painelService = new PainelServiceImpl();
 
-    public MenuActionListener(AbstractController abstractController) {
+    public MenuActionListener(AbstractController abstractController, PainelMenu painelMenu) {
         this.abstractController = abstractController;
+        this.painelMenu = painelMenu;
     }
 
     @Override
@@ -19,7 +26,10 @@ public class MenuActionListener implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        this.abstractController.get();
+        if (this.painelService.isPainelMenuAtualDiferente(painelMenu)) {
+            this.abstractController.get();
+            this.painelService.setPainelMenuAtual(painelMenu);
+        }
     }
 
     @Override
