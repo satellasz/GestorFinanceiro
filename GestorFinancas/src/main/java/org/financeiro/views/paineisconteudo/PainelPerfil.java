@@ -5,6 +5,7 @@ import java.awt.*;
 public class PainelPerfil extends AbstractPainelCentral {
     @Override
     public void onLoad() {
+        this.painelService.setProcessoEmAndamento(false);
         this.add(getPainelCima(), BorderLayout.NORTH);
         this.add(getPainelBaixo(), BorderLayout.SOUTH);
     }

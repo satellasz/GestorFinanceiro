@@ -17,7 +17,7 @@ import javax.swing.*;
 public class TransacaoAdicionarController extends AbstractController {
     @Override
     public void get() {
-        painelService.setPainelConteudo(new PainelAdicionarTransacao());
+        painelService.setPainelConteudo(new PainelAdicionarTransacao(this.categoriaService.listarCategorias()));
         painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.TRANSACOES));
     }
 

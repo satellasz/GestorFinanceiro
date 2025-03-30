@@ -20,21 +20,26 @@ import static org.financeiro.controllers.AbstractController.TODAS;
 
 public class PainelListaTransacoes extends AbstractPainelCentral {
     private final transient List<Transacao> transacaoList;
+    private final transient List<Categoria> categorias;
     private transient FiltroDto filtroDto;
 
-    public PainelListaTransacoes(List<Transacao> transacaoList) {
+    public PainelListaTransacoes(List<Transacao> transacaoList, List<Categoria> categorias) {
         this.transacaoList = transacaoList;
+        this.categorias = categorias;
     }
 
-    public PainelListaTransacoes(List<Transacao> transacaoList, FiltroDto filtroDto) {
+    public PainelListaTransacoes(List<Transacao> transacaoList, List<Categoria> categorias, FiltroDto filtroDto) {
         this.transacaoList = transacaoList;
+        this.categorias = categorias;
         this.filtroDto = filtroDto;
     }
 
     @Override
     public void onLoad() {
+        this.painelService.setProcessoEmAndamento(false);
+        this.add(getPainelFooter("Lista de transações"), BorderLayout.SOUTH);
         this.add(getPainelCima(), BorderLayout.NORTH);
-        this.add(getPainelBaixo(), BorderLayout.SOUTH);
+        this.add(getPainelBaixo(), BorderLayout.CENTER);
         customizarPainelCima();
         customizarPainelBaixo();
     }
@@ -71,7 +76,7 @@ public class PainelListaTransacoes extends AbstractPainelCentral {
 
         comboBoxCategoria.addValorComboBox(TODAS);
 
-        for (Categoria categoriaEncontrada : this.categoriaService.listarCategorias()) {
+        for (Categoria categoriaEncontrada : categorias) {
             comboBoxCategoria.addValorComboBox(categoriaEncontrada.getNome());
         }
 

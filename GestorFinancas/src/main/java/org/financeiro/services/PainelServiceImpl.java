@@ -20,6 +20,8 @@ public class PainelServiceImpl implements PainelService {
     @Override
     public void limparContainer() {
         SwingSingleton.getInstance().getContainerConteudo().removeAll();
+
+        System.gc();
     }
 
     @Override
@@ -76,5 +78,15 @@ public class PainelServiceImpl implements PainelService {
         if (painelMenuAtual == null) return true;
 
         return painelMenuAtual.getTipoPainelMenu() != painelMenu.getTipoPainelMenu();
+    }
+
+    @Override
+    public void setProcessoEmAndamento(boolean processoEmAndamento) {
+        SwingSingleton.getInstance().setProcessoEmAndamento(processoEmAndamento);
+    }
+
+    @Override
+    public boolean isProcessoEmAndamento() {
+        return SwingSingleton.getInstance().isProcessoEmAndamento();
     }
 }

@@ -16,4 +16,6 @@ public interface PainelService {
     PainelMenu getPainelMenuAtual();
     void setPainelMenuAtual(PainelMenu painelMenu);
     boolean isPainelMenuAtualDiferente(PainelMenu painelMenu);
+    void setProcessoEmAndamento(boolean processoEmAndamento);
+    boolean isProcessoEmAndamento();
 }

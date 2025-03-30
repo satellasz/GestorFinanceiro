@@ -23,10 +23,6 @@ public class FramePrincipal extends JFrame {
         return conteinerConteudo;
     }
 
-    public PainelLogin getPainelLogin() {
-        return painelLogin;
-    }
-
     public PainelPrincipal getPainelPrincipal() {
         return painelPrincipal;
     }

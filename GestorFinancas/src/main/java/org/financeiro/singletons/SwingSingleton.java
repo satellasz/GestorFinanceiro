@@ -11,6 +11,7 @@ public class SwingSingleton {
     private static SwingSingleton instance = null;
     private final FramePrincipal framePrincipal;
     private PainelMenu painelMenuAtual;
+    private boolean processoEmAndamento = false;
 
     private SwingSingleton() {
         framePrincipal = new FramePrincipal();
@@ -47,5 +48,13 @@ public class SwingSingleton {
 
     public void setPainelMenuAtual(PainelMenu painelMenuAtual) {
         this.painelMenuAtual = painelMenuAtual;
+    }
+
+    public boolean isProcessoEmAndamento() {
+        return processoEmAndamento;
+    }
+
+    public void setProcessoEmAndamento(boolean processoEmAndamento) {
+        this.processoEmAndamento = processoEmAndamento;
     }
 }

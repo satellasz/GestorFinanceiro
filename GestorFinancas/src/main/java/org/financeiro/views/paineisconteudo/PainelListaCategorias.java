@@ -1,16 +1,25 @@
 package org.financeiro.views.paineisconteudo;
 
 import org.financeiro.componentes.Tabela;
+import org.financeiro.models.Categoria;
 import org.financeiro.viewmodels.CategoriaModelTabela;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class PainelListaCategorias extends AbstractPainelCentral {
+    private final transient List<Categoria> categorias;
+
+    public PainelListaCategorias( List<Categoria> categorias) {
+        this.categorias = categorias;
+    }
     @Override
     public void onLoad() {
+        this.painelService.setProcessoEmAndamento(false);
+        this.add(getPainelFooter("Lista de categorias"), BorderLayout.SOUTH);
         this.add(getPainelCima(), BorderLayout.NORTH);
-        this.add(getPainelBaixo(), BorderLayout.SOUTH);
+        this.add(getPainelBaixo(), BorderLayout.CENTER);
         customizarPainelCima();
         customizarPainelBaixo();
     }
@@ -31,7 +40,7 @@ public class PainelListaCategorias extends AbstractPainelCentral {
         jPanel1.setLayout(new BorderLayout());
         jPanel1.setBounds(40, 10, 1000, 400);
 
-        Tabela tabela = new Tabela(new CategoriaModelTabela(this.categoriaService.listarCategorias()), this.categoriasController);
+        Tabela tabela = new Tabela(new CategoriaModelTabela(categorias), this.categoriasController);
 
         jPanel1.add(tabela.getPainel());
 

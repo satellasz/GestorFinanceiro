@@ -25,7 +25,7 @@ public class TransacoesController extends AbstractController {
 
     @Override
     public void get() {
-        painelService.setPainelConteudo(new PainelListaTransacoes(this.transacaoService.listarTransacoes()));
+        painelService.setPainelConteudo(new PainelListaTransacoes(this.transacaoService.listarTransacoes(), this.categoriaService.listarCategorias()));
         painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.TRANSACOES));
     }
 
@@ -52,7 +52,7 @@ public class TransacoesController extends AbstractController {
 
             List<Transacao> transacaoListFiltradas = this.transacaoService.getTransacoesFiltradas(filtroDto);
 
-            painelService.setPainelConteudo(new PainelListaTransacoes(transacaoListFiltradas, filtroDto));
+            painelService.setPainelConteudo(new PainelListaTransacoes(transacaoListFiltradas, this.categoriaService.listarCategorias(), filtroDto));
             painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.TRANSACOES));
         } catch (CampoObrigatorioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Campo obrigatório", JOptionPane.ERROR_MESSAGE);
@@ -80,7 +80,7 @@ public class TransacoesController extends AbstractController {
 
             Categoria categoria = this.categoriaService.buscarCategoria(transacao.getIdCategoria());
 
-            painelService.setPainelConteudo(new PainelAdicionarTransacao(transacao, categoria));
+            painelService.setPainelConteudo(new PainelAdicionarTransacao(transacao, categoria, this.categoriaService.listarCategorias()));
             painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.CATEGORIAS));
         } catch (DadoNaoEncontradoException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), NAO_ENCONTRADO, JOptionPane.ERROR_MESSAGE);

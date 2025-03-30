@@ -37,7 +37,7 @@ public class CategoriaAdicionarController extends AbstractController {
                 this.categoriaService.alterarCategoria(categoria);
             }
 
-            painelService.setPainelConteudo(new PainelListaCategorias());
+            painelService.setPainelConteudo(new PainelListaCategorias(this.categoriaService.listarCategorias()));
             painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.CATEGORIAS));
         } catch (CampoObrigatorioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Campo obrigatório", JOptionPane.ERROR_MESSAGE);

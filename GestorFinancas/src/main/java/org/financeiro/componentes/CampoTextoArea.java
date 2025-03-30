@@ -44,6 +44,7 @@ public class CampoTextoArea extends AbstractInputComponente {
         this.textArea.setPreferredSize(new Dimension(LARGURA_PADRAO_PAINEL, ALTURA_PADRAO_TEXT_AREA));
         this.textArea.setName(tipoInputComponente.getId());
         this.textArea.setLineWrap(true);
+        this.textArea.setFont(this.textArea.getFont().deriveFont(15f));
 
         this.getPanel().add(this.textArea, BorderLayout.CENTER);
     }

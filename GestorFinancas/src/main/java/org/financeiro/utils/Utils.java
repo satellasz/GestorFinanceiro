@@ -36,4 +36,8 @@ public class Utils {
     public static String getData(LocalDate date) {
         return date.format(formatter);
     }
+
+    public static String getDataAtual() {
+        return getData(LocalDate.now());
+    }
 }

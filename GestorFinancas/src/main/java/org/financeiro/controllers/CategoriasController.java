@@ -14,7 +14,7 @@ public class CategoriasController extends AbstractController {
 
     @Override
     public void get() {
-        painelService.setPainelConteudo(new PainelListaCategorias());
+        painelService.setPainelConteudo(new PainelListaCategorias(this.categoriaService.listarCategorias()));
         painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.CATEGORIAS));
     }
 
