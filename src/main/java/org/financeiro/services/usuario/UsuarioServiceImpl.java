@@ -88,6 +88,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public void setUsuarioLogado(UsuarioDto usuario) {
+        if (usuario == null) {
+            this.usuarioRepository.setUsuarioLogado(null);
+
+            return;
+        }
+
         Usuario usuarioEncontrado = this.usuarioRepository.buscarUsuario(usuario.id());
 
         this.usuarioRepository.setUsuarioLogado(usuarioEncontrado);

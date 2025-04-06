@@ -22,15 +22,12 @@ public class Tabela {
 
         this.painel = new JPanel();
         this.painel.setLayout(new BorderLayout());
-        JPanel panelPaginacao = new JPanel(new GridLayout(1, 2));
-        panelPaginacao.setPreferredSize(new Dimension(0, 25));
 
         JTable tabela = getTabela(model);
 
         JScrollPane scrollPane = new JScrollPane(tabela);
 
         this.painel.add(scrollPane, BorderLayout.CENTER);
-        this.painel.add(panelPaginacao, BorderLayout.SOUTH);
     }
 
     private JTable getTabela(AbstractTableModel model) {

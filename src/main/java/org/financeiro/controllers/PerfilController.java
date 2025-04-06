@@ -7,7 +7,7 @@ import org.financeiro.views.paineisconteudo.PainelPerfil;
 public class PerfilController extends AbstractController {
     @Override
     public void get() {
-        painelService.setPainelConteudo(new PainelPerfil());
+        painelService.setPainelConteudo(new PainelPerfil(this.usuarioService.buscarUsuarioLogado()));
         painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.PERFIL));
     }
 

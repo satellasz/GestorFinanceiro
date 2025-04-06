@@ -14,6 +14,8 @@ import javax.swing.*;
 public class LoginController extends AbstractController {
     @Override
     public void get() {
+        this.loginService.logout();
+        this.painelService.setPainelMenuAtual(null);
         painelService.setContainerConteudo(SwingSingleton.getInstance().getPainelPrincipal());
         painelService.setContainerConteudo(new PainelLogin());
     }
