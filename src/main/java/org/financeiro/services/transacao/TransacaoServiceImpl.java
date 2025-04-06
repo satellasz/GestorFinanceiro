@@ -33,6 +33,10 @@ public class TransacaoServiceImpl implements TransacaoService {
             throw new CampoInvalidoException("Data não pode ser maior que a data atual");
         }
 
+        if (transacao.valor() <= 0) {
+            throw new CampoInvalidoException("Valor da transação não pode ser inferior ou igual a 0");
+        }
+
         Transacao transacaoNova = new Transacao(transacao.id(), transacao.valor(), transacao.descricao(), transacao.categoriaDto().id(), transacao.classificacao(), transacao.usuarioDto().id(), transacao.dataTransacao());
 
         this.transacaoRepository.cadastrarTransacao(transacaoNova);
