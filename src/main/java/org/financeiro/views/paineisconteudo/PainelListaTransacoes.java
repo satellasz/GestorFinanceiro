@@ -39,7 +39,7 @@ public class PainelListaTransacoes extends AbstractPainelCentral {
     @Override
     protected void customizarPainelCima() {
         this.painelCima.setLayout(new GridLayout(1, 2));
-        this.painelCima.add(getPainelComFormularioFiltro(categorias, filtroDto, true));
+        this.painelCima.add(getPainelComFormularioFiltro(categorias, filtroDto, true, this.transacoesController));
         this.painelCima.add(getPainelAdicionar(this.transacaoAdicionarController));
     }
 

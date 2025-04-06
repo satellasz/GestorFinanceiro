@@ -1,12 +1,8 @@
 package org.financeiro.views.paineisconteudo;
 
-import org.financeiro.componentes.Botao;
-import org.financeiro.componentes.Formulario;
 import org.financeiro.dtos.CategoriaDto;
 import org.financeiro.dtos.FiltroDto;
 import org.financeiro.dtos.ResumoFinanceiroDto;
-import org.financeiro.listeners.GetActionListener;
-import org.financeiro.listeners.PostActionListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,7 +36,7 @@ public class PainelResumoFinanceiro extends AbstractPainelCentral {
     @Override
     protected void customizarPainelCima() {
         this.painelCima.setLayout(new GridLayout(1, 2));
-        this.painelCima.add(getPainelComFormularioFiltro(categorias, filtroDto, false));
+        this.painelCima.add(getPainelComFormularioFiltro(categorias, filtroDto, false, this.resumoFinanceiroController));
         this.painelCima.add(getPainelSaldo());
     }
 

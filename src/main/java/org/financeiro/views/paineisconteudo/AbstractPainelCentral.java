@@ -193,21 +193,21 @@ public abstract class AbstractPainelCentral extends JPanel {
         return formularioFiltro;
     }
 
-    protected JPanel getPainelComFormularioFiltro(List<CategoriaDto> categorias, FiltroDto filtroDto, boolean utilizaClassificao) {
+    protected JPanel getPainelComFormularioFiltro(List<CategoriaDto> categorias, FiltroDto filtroDto, boolean utilizaClassificao, AbstractController controller) {
         JPanel painelComFormularioFiltro = new JPanel();
         painelComFormularioFiltro.setLayout(null);
 
-        Formulario formulario = getFormularioFiltro(categorias, filtroDto, utilizaClassificao);
+        Formulario formularioFiltro = getFormularioFiltro(categorias, filtroDto, utilizaClassificao);
 
-        Botao botaoFiltrar = new Botao(new PostActionListener(this.resumoFinanceiroController, formulario));
+        Botao botaoFiltrar = new Botao(new PostActionListener(controller, formularioFiltro));
         botaoFiltrar.setBounds(285, 175, 125, 50);
         botaoFiltrar.setText("Filtrar");
 
-        Botao botaoResetarFiltro = new Botao(new GetActionListener(this.resumoFinanceiroController));
+        Botao botaoResetarFiltro = new Botao(new GetActionListener(controller));
         botaoResetarFiltro.setBounds(40, 175, 125, 50);
         botaoResetarFiltro.setText("Resetar filtro");
 
-        painelComFormularioFiltro.add(formulario.getPanel());
+        painelComFormularioFiltro.add(formularioFiltro.getPanel());
         painelComFormularioFiltro.add(botaoFiltrar);
         painelComFormularioFiltro.add(botaoResetarFiltro);
 
