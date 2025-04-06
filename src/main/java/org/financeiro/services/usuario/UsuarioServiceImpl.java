@@ -16,7 +16,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public void cadastrarUsuario(UsuarioDto usuario) throws CadastroContaException {
-        Usuario usuarioEncontrado = this.usuarioRepository.buscarUsuario(usuario.senha());
+        Usuario usuarioEncontrado = this.usuarioRepository.buscarUsuario(usuario.nome().trim());
         
         if (usuarioEncontrado != null) {
             throw new CadastroContaException("Já existe um usuário com este nome");
