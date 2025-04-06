@@ -13,6 +13,7 @@ import org.financeiro.services.categoria.CategoriaService;
 import org.financeiro.services.categoria.CategoriaServiceImpl;
 import org.financeiro.services.usuario.UsuarioService;
 import org.financeiro.services.usuario.UsuarioServiceImpl;
+import org.financeiro.utils.Utils;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -127,7 +128,7 @@ public class TransacaoServiceImpl implements TransacaoService {
             transacoes = transacoes.stream().filter(x -> x.categoriaDto().id() == filtroDto.categoria().id()).toList();
         }
 
-        if (!Objects.equals(filtroDto.classificacao(), TODAS)) {
+        if (!Utils.isStringVazia(filtroDto.classificacao()) && !Objects.equals(filtroDto.classificacao(), TODAS)) {
             transacoes = transacoes.stream().filter(x -> x.classificacao().getNome().equals(filtroDto.classificacao())).toList();
         }
 

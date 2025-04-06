@@ -4,10 +4,7 @@ import org.financeiro.componentes.Formulario;
 import org.financeiro.enums.TipoCampoTexto;
 import org.financeiro.exceptions.CampoInvalidoException;
 import org.financeiro.exceptions.CampoObrigatorioException;
-import org.financeiro.services.FormularioService;
-import org.financeiro.services.FormularioServiceImpl;
-import org.financeiro.services.PainelService;
-import org.financeiro.services.PainelServiceImpl;
+import org.financeiro.services.*;
 import org.financeiro.services.categoria.CategoriaService;
 import org.financeiro.services.categoria.CategoriaServiceImpl;
 import org.financeiro.services.transacao.TransacaoService;
@@ -25,6 +22,7 @@ public abstract class AbstractController {
     protected final TransacaoService transacaoService = new TransacaoServiceImpl();
     protected final UsuarioService usuarioService = new UsuarioServiceImpl();
     protected final LoginService loginService = new LoginServiceImpl();
+    protected final ResumoFinanceiroService resumoFinanceiroService = new ResumoFinanceiroServiceImpl();
     public static final String TODAS = "TODAS";
     public static final String NAO_ENCONTRADO = "Não encontrado";
 

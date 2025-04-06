@@ -2,7 +2,7 @@ package org.financeiro.views;
 
 import org.financeiro.controllers.CategoriasController;
 import org.financeiro.controllers.PerfilController;
-import org.financeiro.controllers.ResumoController;
+import org.financeiro.controllers.ResumoFinanceiroController;
 import org.financeiro.controllers.TransacoesController;
 import org.financeiro.enums.TipoPainelMenu;
 
@@ -20,7 +20,7 @@ public class PainelPrincipal extends JPanel {
 
         PainelMenu painelTranscoes = new PainelMenu(TipoPainelMenu.TRANSACOES, Color.decode("#779cf2"), new TransacoesController(), 0, 0);
         PainelMenu painelCategorias = new PainelMenu(TipoPainelMenu.CATEGORIAS, Color.decode("#f2bf77"), new CategoriasController(), 1, 0);
-        PainelMenu painelResumo = new PainelMenu(TipoPainelMenu.RESUMO, Color.decode("#6ff28e"), new ResumoController(), 1, 0);
+        PainelMenu painelResumo = new PainelMenu(TipoPainelMenu.RESUMO, Color.decode("#6ff28e"), new ResumoFinanceiroController(), 1, 0);
         PainelMenu painelPerfil = new PainelMenu(TipoPainelMenu.PERFIL, Color.LIGHT_GRAY, new PerfilController(), 1, 0);
 
         JPanel painelTransicao = new JPanel();

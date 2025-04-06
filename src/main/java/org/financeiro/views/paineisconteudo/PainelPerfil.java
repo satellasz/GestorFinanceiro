@@ -5,7 +5,6 @@ import org.financeiro.dtos.UsuarioDto;
 import org.financeiro.listeners.GetActionListener;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class PainelPerfil extends AbstractPainelCentral {
@@ -36,30 +35,14 @@ public class PainelPerfil extends AbstractPainelCentral {
 
     @Override
     protected void customizarPainelBaixo() {
-        JPanel painelInformacoes = new JPanel();
+        JPanel painelAgrupador = new JPanel();
 
-        painelInformacoes.add(getPainelInfo("Nome", usuario.nome()));
-        painelInformacoes.add(getPainelInfo("Email", usuario.email()));
+        painelAgrupador.add(getPainelInfo("Nome", usuario.nome()));
+        painelAgrupador.add(getPainelInfo("Email", usuario.email()));
 
         this.painelBaixo.setLayout(new GridLayout(1, 2));
-        this.painelBaixo.add(painelInformacoes);
+        this.painelBaixo.add(painelAgrupador);
         this.painelBaixo.add(getPainelBotaoLogout());
-    }
-
-    private JPanel getPainelInfo(String label, String info) {
-        JPanel painelInfo = new JPanel(new BorderLayout(25, 5));
-
-        JLabel labelDaInfo = new JLabel(label);
-
-        JLabel informacao = new JLabel(info);
-        informacao.setFont(informacao.getFont().deriveFont(30f));
-        informacao.setBorder(getBorders());
-        informacao.setPreferredSize(new Dimension(500, 75));
-
-        painelInfo.add(labelDaInfo, BorderLayout.NORTH);
-        painelInfo.add(informacao, BorderLayout.CENTER);
-
-        return painelInfo;
     }
 
     private JPanel getPainelBotaoLogout() {
@@ -75,11 +58,4 @@ public class PainelPerfil extends AbstractPainelCentral {
         return painelBotaoLogout;
     }
 
-    private Border getBorders() {
-        Border innerBorder = BorderFactory.createLineBorder(Color.BLACK, 1, true);
-
-        Border outerBorder = BorderFactory.createEmptyBorder(5, 15, 20, 0);
-
-        return BorderFactory.createCompoundBorder(outerBorder, innerBorder);
-    }
- }
+}
