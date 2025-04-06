@@ -8,7 +8,7 @@ import org.financeiro.exceptions.IntegridadeException;
 import java.util.List;
 
 public interface CategoriaService {
-    void cadastrarCategoria(CategoriaDto categoria) throws DadoNaoEncontradoException;
+    void cadastrarCategoria(CategoriaDto categoria) throws DadoNaoEncontradoException, IntegridadeException;
 
     List<CategoriaDto> listarCategorias() throws DadoNaoEncontradoException;
 

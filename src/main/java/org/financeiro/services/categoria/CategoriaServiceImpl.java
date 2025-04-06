@@ -19,7 +19,13 @@ public class CategoriaServiceImpl implements CategoriaService {
     private final UsuarioService usuarioService = new UsuarioServiceImpl();
 
     @Override
-    public void cadastrarCategoria(CategoriaDto categoria) {
+    public void cadastrarCategoria(CategoriaDto categoria) throws IntegridadeException {
+        Categoria categoriaSalva = this.categoriaRepository.buscarCategoria(categoria.nome().trim());
+
+        if (categoriaSalva != null) {
+            throw new IntegridadeException("Há uma Categoria previamente salva com este nome");
+        }
+
         Categoria categoriaNova = new Categoria(categoria.id(), categoria.nome(), categoria.descricao(), categoria.usuarioDto().id());
 
         categoriaRepository.cadastrarCategoria(categoriaNova);

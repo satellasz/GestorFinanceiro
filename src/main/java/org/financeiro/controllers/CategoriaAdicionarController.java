@@ -8,6 +8,7 @@ import org.financeiro.enums.TipoPainelMenu;
 import org.financeiro.exceptions.CampoInvalidoException;
 import org.financeiro.exceptions.CampoObrigatorioException;
 import org.financeiro.exceptions.DadoNaoEncontradoException;
+import org.financeiro.exceptions.IntegridadeException;
 import org.financeiro.views.paineisconteudo.PainelAdicionarCategoria;
 import org.financeiro.views.paineisconteudo.PainelListaCategorias;
 
@@ -48,6 +49,8 @@ public class CategoriaAdicionarController extends AbstractController {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Não encontrado", JOptionPane.ERROR_MESSAGE);
         } catch (CampoInvalidoException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Campo inválido", JOptionPane.ERROR_MESSAGE);
+        } catch (IntegridadeException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Categoria existente", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
