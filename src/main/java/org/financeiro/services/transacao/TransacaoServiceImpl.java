@@ -102,7 +102,9 @@ public class TransacaoServiceImpl implements TransacaoService {
             throw new DadoNaoEncontradoException("Transação não foi encontrada para edição");
         }
 
-        Transacao transacaoAlterada = new Transacao(transacao.id(), transacao.valor(), transacao.descricao(), transacaoEncontrada.getCategoria(),
+        Categoria categoriaTransacao = this.categoriaService.buscarCategoria(transacao.categoriaDto().id());
+
+        Transacao transacaoAlterada = new Transacao(transacao.id(), transacao.valor(), transacao.descricao(), categoriaTransacao,
                 transacao.classificacao(), transacaoEncontrada.getUsuario(), transacao.dataTransacao());
 
         this.transacaoDAO.alterarTransacao(transacaoAlterada);
