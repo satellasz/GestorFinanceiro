@@ -1,5 +1,6 @@
 package org.financeiro.views;
 
+import org.financeiro.componentes.CampoSenha;
 import org.financeiro.componentes.CampoTexto;
 import org.financeiro.componentes.Formulario;
 import org.financeiro.controllers.CriarContaController;
@@ -39,8 +40,8 @@ public class PainelCriarConta extends JPanel {
     private static Formulario getFormulario() {
         CampoTexto campoTextoUsername = new CampoTexto(Color.WHITE, TipoInputComponente.USUARIO_NOME, "Usuário: ", TipoCampoTexto.TEXTO, true);
         CampoTexto campoTextoEmail = new CampoTexto(Color.WHITE, TipoInputComponente.USUARIO_EMAIL, "Email:", TipoCampoTexto.TEXTO, true);
-        CampoTexto campoTextoSenha = new CampoTexto(Color.WHITE, TipoInputComponente.USUARIO_SENHA, "Senha:", TipoCampoTexto.TEXTO, true);
-        CampoTexto campoTextoConfirmarSenha = new CampoTexto(Color.WHITE, TipoInputComponente.USUARIO_CONFIRMAR_SENHA, "Confirmar senha:", TipoCampoTexto.TEXTO, true);
+        CampoSenha campoTextoSenha = new CampoSenha(Color.WHITE, TipoInputComponente.USUARIO_SENHA, "Senha:", TipoCampoTexto.TEXTO, true);
+        CampoSenha campoTextoConfirmarSenha = new CampoSenha(Color.WHITE, TipoInputComponente.USUARIO_CONFIRMAR_SENHA, "Confirmar senha:", TipoCampoTexto.TEXTO, true);
 
         Formulario formulario = new Formulario(450, 250, 400, 200);
         formulario.addComponente(campoTextoUsername);

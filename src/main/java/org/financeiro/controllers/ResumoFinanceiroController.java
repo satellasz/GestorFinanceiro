@@ -22,7 +22,7 @@ public class ResumoFinanceiroController extends AbstractController {
     @Override
     public void get() {
         try {
-            painelService.setPainelConteudo(new PainelResumoFinanceiro(this.resumoFinanceiroService.getResumoFinanceiro(this.transacaoService.listarTransacoes()), this.categoriaService.listarCategorias()));
+            painelService.setPainelConteudo(new PainelResumoFinanceiro(this.usuarioService.buscarUsuarioLogado(), this.resumoFinanceiroService.getResumoFinanceiro(this.transacaoService.listarTransacoes()), this.categoriaService.listarCategorias()));
         } catch (DadoNaoEncontradoException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), NAO_ENCONTRADO, JOptionPane.ERROR_MESSAGE);
         }
@@ -45,7 +45,7 @@ public class ResumoFinanceiroController extends AbstractController {
             CategoriaDto categoria = null;
 
             if (!Objects.equals(categoriaNome, TODAS)) {
-                categoria = this.categoriaService.buscarCategoria(categoriaNome);
+                categoria = this.categoriaService.buscarCategoriaDto(categoriaNome);
             }
 
             FiltroDto filtroDto = new FiltroDto(dataInicioParsed, dataFinalParsed, categoria, classificacao);
@@ -54,7 +54,7 @@ public class ResumoFinanceiroController extends AbstractController {
 
             ResumoFinanceiroDto resumoFinanceiroDto = this.resumoFinanceiroService.getResumoFinanceiro(transacaoListFiltradas);
 
-            painelService.setPainelConteudo(new PainelResumoFinanceiro(resumoFinanceiroDto, filtroDto, this.categoriaService.listarCategorias()));
+            painelService.setPainelConteudo(new PainelResumoFinanceiro(this.usuarioService.buscarUsuarioLogado(), resumoFinanceiroDto, filtroDto, this.categoriaService.listarCategorias()));
             painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.RESUMO));
         } catch (CampoObrigatorioException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Campo obrigatório", JOptionPane.ERROR_MESSAGE);

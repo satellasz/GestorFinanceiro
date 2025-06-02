@@ -9,7 +9,7 @@ import java.util.List;
 public class Formulario {
     private final List<AbstractInputComponente> componentes;
     private final JPanel jPanel;
-    private int idObjeto;
+    private long idObjeto;
     private final int dimensionX;
     private final int dimensionY;
     private final int width;
@@ -56,11 +56,11 @@ public class Formulario {
         return jPanel;
     }
 
-    public int getIdObjeto() {
+    public long getIdObjeto() {
         return idObjeto;
     }
 
-    public void setIdObjeto(int idObjeto) {
+    public void setIdObjeto(long idObjeto) {
         this.idObjeto = idObjeto;
     }
 

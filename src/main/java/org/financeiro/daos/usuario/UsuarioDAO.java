@@ -1,19 +1,19 @@
-package org.financeiro.repositories.usuario;
+package org.financeiro.daos.usuario;
 
 import org.financeiro.models.Usuario;
 
 import java.util.List;
 
-public interface UsuarioRepository {
+public interface UsuarioDAO {
     void cadastrarUsuario(Usuario usuario);
 
     List<Usuario> listarUsuarios();
 
-    void excluirUsuario(int id);
+    void excluirUsuario(long id);
 
     void alterarUsuario(Usuario usuario);
 
-    Usuario buscarUsuario(int id);
+    Usuario buscarUsuario(long id);
 
     Usuario buscarUsuarioLogado();
 

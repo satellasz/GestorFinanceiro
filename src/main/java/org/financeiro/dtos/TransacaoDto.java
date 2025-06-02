@@ -5,7 +5,7 @@ import org.financeiro.enums.ClassificacaoTransacao;
 
 import java.time.LocalDate;
 
-public record TransacaoDto(int id,
+public record TransacaoDto(long id,
                            String descricao,
                            double valor,
                            CategoriaDto categoriaDto,

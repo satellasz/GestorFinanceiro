@@ -11,6 +11,7 @@ public class PainelPerfil extends AbstractPainelCentral {
     private final transient UsuarioDto usuario;
 
     public PainelPerfil(UsuarioDto usuarioDto) {
+        super(usuarioDto);
         this.usuario = usuarioDto;
     }
 
