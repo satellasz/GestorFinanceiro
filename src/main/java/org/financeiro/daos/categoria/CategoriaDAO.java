@@ -9,6 +9,7 @@ public interface CategoriaDAO {
     List<Categoria> listarCategorias();
     boolean excluirCategoria(long id);
     void alterarCategoria(Categoria categoria);
+    Categoria buscarCategoria(String nome, long idUsuario);
     Categoria buscarCategoria(String nome);
     Categoria buscarCategoria(long id);
 }

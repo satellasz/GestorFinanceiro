@@ -35,6 +35,11 @@ public class CategoriaDAOMemImpl implements CategoriaDAO {
     }
 
     @Override
+    public Categoria buscarCategoria(String nome, long idUsuario) {
+        return CategoriaSingleton.getInstance().getCategorias().stream().filter(x -> Objects.equals(x.getNome(), nome) && x.getUsuario().getId() == idUsuario).findFirst().orElse(null);
+    }
+
+    @Override
     public Categoria buscarCategoria(String nome) {
         return CategoriaSingleton.getInstance().getCategorias().stream().filter(x -> Objects.equals(x.getNome(), nome) && x.getUsuario().getId() == this.usuarioService.buscarUsuarioLogado().id()).findFirst().orElse(null);
     }

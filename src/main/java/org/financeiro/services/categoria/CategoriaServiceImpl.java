@@ -23,13 +23,13 @@ public class CategoriaServiceImpl implements CategoriaService {
     public void cadastrarCategoria(String nome,
                                    String descricao,
                                    UsuarioDto usuarioDto) throws IntegridadeException, DadoNaoEncontradoException {
-        Categoria categoriaSalva = this.categoriaDAO.buscarCategoria(nome.trim());
+        Usuario usuarioCategoria = this.usuarioService.buscarUsuario(usuarioDto.id());
+
+        Categoria categoriaSalva = this.categoriaDAO.buscarCategoria(nome.trim(), usuarioCategoria.getId());
 
         if (categoriaSalva != null) {
             throw new IntegridadeException("Há uma Categoria previamente salva com este nome");
         }
-
-        Usuario usuarioCategoria = this.usuarioService.buscarUsuario(usuarioDto.id());
 
         Categoria categoriaNova = new Categoria(nome, descricao, usuarioCategoria);
 

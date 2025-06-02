@@ -54,6 +54,16 @@ public class CategoriaDAOBancoImpl implements CategoriaDAO {
     }
 
     @Override
+    public Categoria buscarCategoria(String nome, long idUsuario) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("from Categoria where nome = :nome and usuario.id = :idUsuario", Categoria.class)
+                    .setParameter("nome", nome)
+                    .setParameter("idUsuario", idUsuario)
+                    .uniqueResult();
+        }
+    }
+
+    @Override
     public Categoria buscarCategoria(String nome) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("from Categoria where nome = :nome", Categoria.class)
