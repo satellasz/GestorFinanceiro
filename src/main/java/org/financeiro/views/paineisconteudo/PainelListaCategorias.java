@@ -2,6 +2,7 @@ package org.financeiro.views.paineisconteudo;
 
 import org.financeiro.componentes.Tabela;
 import org.financeiro.dtos.CategoriaDto;
+import org.financeiro.dtos.UsuarioDto;
 import org.financeiro.models.Categoria;
 import org.financeiro.viewmodels.CategoriaModelTabela;
 
@@ -12,7 +13,8 @@ import java.util.List;
 public class PainelListaCategorias extends AbstractPainelCentral {
     private final transient List<CategoriaDto> categorias;
 
-    public PainelListaCategorias( List<CategoriaDto> categorias) {
+    public PainelListaCategorias(UsuarioDto usuarioDto, List<CategoriaDto> categorias) {
+        super(usuarioDto);
         this.categorias = categorias;
     }
     @Override

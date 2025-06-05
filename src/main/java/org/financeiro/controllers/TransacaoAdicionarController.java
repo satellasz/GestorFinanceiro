@@ -19,7 +19,7 @@ public class TransacaoAdicionarController extends AbstractController {
     @Override
     public void get() {
         try {
-            painelService.setPainelConteudo(new PainelAdicionarTransacao(this.categoriaService.listarCategorias()));
+            painelService.setPainelConteudo(new PainelAdicionarTransacao(this.usuarioService.buscarUsuarioLogado(), this.categoriaService.listarCategorias()));
         } catch (DadoNaoEncontradoException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), NAO_ENCONTRADO, JOptionPane.ERROR_MESSAGE);
         }
@@ -37,13 +37,11 @@ public class TransacaoAdicionarController extends AbstractController {
             String classificacao = this.formularioService.getInputComponente(TipoInputComponente.CLASSFICACAO_TRANSACAO, formulario);
             String dataTransacao = this.formularioService.getInputComponente(TipoInputComponente.DATA_TRANSACAO, formulario);
 
-            CategoriaDto categoria = this.categoriaService.buscarCategoria(categoriaNome);
+            CategoriaDto categoria = this.categoriaService.buscarCategoriaDto(categoriaNome);
             UsuarioDto usuarioLogado = this.usuarioService.buscarUsuarioLogado();
 
             if (formulario.getIdObjeto() <= 0) {
-                TransacaoDto transacao = new TransacaoDto(this.transacaoService.getIdProximaTransacao(), descricao, valor , categoria, ClassificacaoTransacao.buscarClassificacao(classificacao), usuarioLogado, Utils.getData(dataTransacao));
-
-                this.transacaoService.cadastrarTransacao(transacao);
+                this.transacaoService.cadastrarTransacao(descricao, valor , categoria, ClassificacaoTransacao.buscarClassificacao(classificacao), usuarioLogado, Utils.getData(dataTransacao));
             } else {
                 TransacaoDto transacao = new TransacaoDto(formulario.getIdObjeto(), descricao, valor, categoria, ClassificacaoTransacao.buscarClassificacao(classificacao), usuarioLogado, Utils.getData(dataTransacao));
 

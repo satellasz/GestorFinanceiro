@@ -7,14 +7,13 @@ import org.financeiro.componentes.Formulario;
 import org.financeiro.controllers.*;
 import org.financeiro.dtos.CategoriaDto;
 import org.financeiro.dtos.FiltroDto;
+import org.financeiro.dtos.UsuarioDto;
 import org.financeiro.enums.ClassificacaoTransacao;
 import org.financeiro.enums.TipoInputComponente;
 import org.financeiro.listeners.GetActionListener;
 import org.financeiro.listeners.PostActionListener;
 import org.financeiro.services.PainelService;
 import org.financeiro.services.PainelServiceImpl;
-import org.financeiro.services.usuario.UsuarioService;
-import org.financeiro.services.usuario.UsuarioServiceImpl;
 import org.financeiro.utils.Utils;
 
 import javax.swing.*;
@@ -40,12 +39,13 @@ public abstract class AbstractPainelCentral extends JPanel {
     protected JPanel painelCima;
     protected JPanel painelBaixo;
     protected final transient Formulario formulario = new Formulario(325, 50, 400, 500);
-    private final transient UsuarioService usuarioService = new UsuarioServiceImpl();
     protected final transient PainelService painelService = new PainelServiceImpl();
+    private final transient UsuarioDto usuarioDto;
 
-    protected AbstractPainelCentral() {
+    protected AbstractPainelCentral(UsuarioDto usuarioDto) {
         this.setLayout(new BorderLayout());
         this.setBackground(Color.WHITE);
+        this.usuarioDto = usuarioDto;
     }
 
     public abstract void onLoad();
@@ -64,7 +64,7 @@ public abstract class AbstractPainelCentral extends JPanel {
 
         StringBuilder informacoes = new StringBuilder();
         informacoes.append("Usuário logado: ");
-        informacoes.append(this.usuarioService.buscarUsuarioLogado().nome());
+        informacoes.append(usuarioDto.nome());
         informacoes.append(" - ");
         informacoes.append(Utils.getDataAtual());
 
@@ -193,11 +193,11 @@ public abstract class AbstractPainelCentral extends JPanel {
         return formularioFiltro;
     }
 
-    protected JPanel getPainelComFormularioFiltro(List<CategoriaDto> categorias, FiltroDto filtroDto, boolean utilizaClassificao, AbstractController controller) {
+    protected JPanel getPainelComFormularioFiltro(List<CategoriaDto> categorias, FiltroDto filtroDto, boolean utilizaClassificacao, AbstractController controller) {
         JPanel painelComFormularioFiltro = new JPanel();
         painelComFormularioFiltro.setLayout(null);
 
-        Formulario formularioFiltro = getFormularioFiltro(categorias, filtroDto, utilizaClassificao);
+        Formulario formularioFiltro = getFormularioFiltro(categorias, filtroDto, utilizaClassificacao);
 
         Botao botaoFiltrar = new Botao(new PostActionListener(controller, formularioFiltro));
         botaoFiltrar.setBounds(285, 175, 125, 50);

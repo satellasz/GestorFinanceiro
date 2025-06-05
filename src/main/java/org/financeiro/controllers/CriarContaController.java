@@ -1,7 +1,6 @@
 package org.financeiro.controllers;
 
 import org.financeiro.componentes.Formulario;
-import org.financeiro.dtos.UsuarioDto;
 import org.financeiro.enums.TipoInputComponente;
 import org.financeiro.exceptions.CadastroContaException;
 import org.financeiro.exceptions.CampoInvalidoException;
@@ -30,9 +29,7 @@ public class CriarContaController extends AbstractController {
                 throw new CadastroContaException("Senhas não são iguais!");
             }
 
-            UsuarioDto usuario = new UsuarioDto(this.usuarioService.getIdProximoUsuario(), nome, email, senha);
-
-            this.usuarioService.cadastrarUsuario(usuario);
+            this.usuarioService.cadastrarUsuario(nome, email, senha);
 
             JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 

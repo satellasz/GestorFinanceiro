@@ -1,5 +1,6 @@
 package org.financeiro.views;
 
+import org.financeiro.componentes.CampoSenha;
 import org.financeiro.componentes.CampoTexto;
 import org.financeiro.componentes.Formulario;
 import org.financeiro.controllers.CriarContaController;
@@ -22,7 +23,7 @@ public class PainelLogin extends JPanel {
         this.image = ImageSingleton.getInstance().getImage("Login");
 
         CampoTexto campoTextoUsername = new CampoTexto(Color.WHITE, TipoInputComponente.LOGIN_USER, "Usuário: ", TipoCampoTexto.TEXTO, true);
-        CampoTexto campoTextoSenha = new CampoTexto(Color.WHITE, TipoInputComponente.LOGIN_SENHA, "Senha:", TipoCampoTexto.TEXTO, true);
+        CampoSenha campoTextoSenha = new CampoSenha(Color.WHITE, TipoInputComponente.LOGIN_SENHA, "Senha:", TipoCampoTexto.TEXTO, true);
 
         Formulario formulario = new Formulario(450, 250, 400, 100);
         formulario.addComponente(campoTextoUsername);

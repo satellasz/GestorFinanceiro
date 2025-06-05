@@ -28,7 +28,7 @@ public class LoginController extends AbstractController {
             String nome = this.formularioService.getInputComponente(TipoInputComponente.LOGIN_USER, formulario);
             String senha = this.formularioService.getInputComponente(TipoInputComponente.LOGIN_SENHA, formulario);
 
-            UsuarioDto usuario = this.usuarioService.buscarUsuario(nome, senha);
+            UsuarioDto usuario = this.usuarioService.buscarUsuarioDto(nome, senha);
 
             this.loginService.login(usuario);
 
