@@ -1,13 +1,14 @@
-package org.financeiro.repositories.usuario;
+package org.financeiro.daos.usuario;
 
 import org.financeiro.models.Usuario;
 import org.financeiro.singletons.UsuarioSingleton;
 
 import java.util.List;
 
-public class UsuarioRepositoryImpl implements UsuarioRepository {
+public class UsuarioDAOMemImpl implements UsuarioDAO {
     @Override
     public void cadastrarUsuario(Usuario usuario) {
+        usuario.setId(this.getIdProximoUsuario());
         UsuarioSingleton.getInstance().getUsuarios().add(usuario);
     }
 
@@ -17,18 +18,19 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     }
 
     @Override
-    public void excluirUsuario(int id) {
+    public void excluirUsuario(long id) {
         UsuarioSingleton.getInstance().getUsuarios().removeIf(x -> x.getId() == id);
     }
 
     @Override
     public void alterarUsuario(Usuario usuario) {
-        UsuarioSingleton.getInstance().getUsuarios().set(usuario.getId(), usuario);
+        UsuarioSingleton.getInstance().getUsuarios().set((int) usuario.getId(), usuario);
     }
 
     @Override
-    public Usuario buscarUsuario(int id) {
-        return UsuarioSingleton.getInstance().getUsuarios().stream().filter(x -> x.getId() == id).findFirst().orElse(null);
+    public Usuario buscarUsuario(long id) {
+        return UsuarioSingleton.getInstance().getUsuarios().stream().filter(x -> x.getId() == id).findFirst().orElse(
+                null);
     }
 
     @Override
@@ -38,11 +40,24 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
 
     @Override
     public Usuario buscarUsuario(String login) {
-        return UsuarioSingleton.getInstance().getUsuarios().stream().filter(x -> x.getNome().equals(login)).findFirst().orElse(null);
+        return UsuarioSingleton.getInstance().getUsuarios().stream().filter(
+                x -> x.getNome().equals(login)).findFirst().orElse(null);
     }
 
     @Override
     public void setUsuarioLogado(Usuario usuario) {
         UsuarioSingleton.getInstance().setUsuarioLogado(usuario);
+    }
+
+    public long getIdProximoUsuario() {
+        List<Usuario> usuarios = this.listarUsuarios();
+
+        if (usuarios.isEmpty()) {
+            return 1;
+        }
+
+        Usuario ultimoUsuario = usuarios.getLast();
+
+        return ultimoUsuario.getId() + 1L;
     }
 }

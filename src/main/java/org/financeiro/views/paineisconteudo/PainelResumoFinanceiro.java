@@ -3,6 +3,7 @@ package org.financeiro.views.paineisconteudo;
 import org.financeiro.dtos.CategoriaDto;
 import org.financeiro.dtos.FiltroDto;
 import org.financeiro.dtos.ResumoFinanceiroDto;
+import org.financeiro.dtos.UsuarioDto;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,13 +14,15 @@ public class PainelResumoFinanceiro extends AbstractPainelCentral {
     private final transient ResumoFinanceiroDto resumoFinanceiroDto;
     private final transient List<CategoriaDto> categorias;
 
-    public PainelResumoFinanceiro(ResumoFinanceiroDto resumoFinanceiroDto, FiltroDto filtroDto, List<CategoriaDto> categorias) {
+    public PainelResumoFinanceiro(UsuarioDto usuarioDto, ResumoFinanceiroDto resumoFinanceiroDto, FiltroDto filtroDto, List<CategoriaDto> categorias) {
+        super(usuarioDto);
         this.filtroDto = filtroDto;
         this.resumoFinanceiroDto = resumoFinanceiroDto;
         this.categorias = categorias;
     }
 
-    public PainelResumoFinanceiro(ResumoFinanceiroDto resumoFinanceiroDto, List<CategoriaDto> categorias) {
+    public PainelResumoFinanceiro(UsuarioDto usuarioDto, ResumoFinanceiroDto resumoFinanceiroDto, List<CategoriaDto> categorias) {
+        super(usuarioDto);
         this.resumoFinanceiroDto = resumoFinanceiroDto;
         this.categorias = categorias;
     }

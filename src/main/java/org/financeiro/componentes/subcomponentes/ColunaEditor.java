@@ -27,7 +27,7 @@ public class ColunaEditor extends AbstractCellEditor implements TableCellEditor 
                 if (tabela != null) {
                     Object valorPrimeiraColuna = tabela.getValueAt(rowIndex, 0);
 
-                    if (valorPrimeiraColuna instanceof Integer id) {
+                    if (valorPrimeiraColuna instanceof Long id) {
                         if (nomeColuna == TipoColunaTabela.EDITAR) {
                             abstractController.patch(id);
                         } else {

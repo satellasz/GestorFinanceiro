@@ -1,14 +1,17 @@
 package org.financeiro.services.transacao;
 
+import org.financeiro.daos.transacao.TransacaoDAO;
+import org.financeiro.daos.transacao.TransacaoDAOBancoImpl;
 import org.financeiro.dtos.CategoriaDto;
 import org.financeiro.dtos.FiltroDto;
 import org.financeiro.dtos.TransacaoDto;
 import org.financeiro.dtos.UsuarioDto;
+import org.financeiro.enums.ClassificacaoTransacao;
 import org.financeiro.exceptions.CampoInvalidoException;
 import org.financeiro.exceptions.DadoNaoEncontradoException;
+import org.financeiro.models.Categoria;
 import org.financeiro.models.Transacao;
-import org.financeiro.repositories.transacao.TransacaoRepository;
-import org.financeiro.repositories.transacao.TransacaoRepositoryImpl;
+import org.financeiro.models.Usuario;
 import org.financeiro.services.categoria.CategoriaService;
 import org.financeiro.services.categoria.CategoriaServiceImpl;
 import org.financeiro.services.usuario.UsuarioService;
@@ -23,35 +26,47 @@ import java.util.Objects;
 import static org.financeiro.controllers.AbstractController.TODAS;
 
 public class TransacaoServiceImpl implements TransacaoService {
-    private final TransacaoRepository transacaoRepository = new TransacaoRepositoryImpl();
+    private final TransacaoDAO transacaoDAO = new TransacaoDAOBancoImpl();
     private final CategoriaService categoriaService = new CategoriaServiceImpl();
     private final UsuarioService usuarioService = new UsuarioServiceImpl();
 
     @Override
-    public void cadastrarTransacao(TransacaoDto transacao) throws CampoInvalidoException {
-        if (transacao.dataTransacao().isAfter(LocalDate.now())) {
+    public void cadastrarTransacao(String descricao,
+                                   double valor,
+                                   CategoriaDto categoriaDto,
+                                   ClassificacaoTransacao classificacao,
+                                   UsuarioDto usuarioDto,
+                                   LocalDate dataTransacao) throws CampoInvalidoException, DadoNaoEncontradoException {
+        if (dataTransacao.isAfter(LocalDate.now())) {
             throw new CampoInvalidoException("Data não pode ser maior que a data atual");
         }
 
-        if (transacao.valor() <= 0) {
+        if (valor <= 0) {
             throw new CampoInvalidoException("Valor da transação não pode ser inferior ou igual a 0");
         }
 
-        Transacao transacaoNova = new Transacao(transacao.id(), transacao.valor(), transacao.descricao(), transacao.categoriaDto().id(), transacao.classificacao(), transacao.usuarioDto().id(), transacao.dataTransacao());
+        Usuario usuarioTransacao = this.usuarioService.buscarUsuario(usuarioDto.id());
 
-        this.transacaoRepository.cadastrarTransacao(transacaoNova);
+        Categoria categoriaTransacao = this.categoriaService.buscarCategoria(categoriaDto.id());
+
+        Transacao transacaoNova = new Transacao(valor, descricao, categoriaTransacao,
+               classificacao, usuarioTransacao, dataTransacao);
+
+        this.transacaoDAO.cadastrarTransacao(transacaoNova);
     }
 
     @Override
     public List<TransacaoDto> listarTransacoes() throws DadoNaoEncontradoException {
         List<TransacaoDto> transacaoDtos = new ArrayList<>();
 
-        List<Transacao> transacoesSalvas = this.transacaoRepository.listarTransacoes();
+        List<Transacao> transacoesSalvas = this.transacaoDAO.listarTransacoes();
 
         for (Transacao transacao : transacoesSalvas) {
-            CategoriaDto categoriaDto = this.categoriaService.buscarCategoria(transacao.getIdCategoria());
-            UsuarioDto usuarioDto = this.usuarioService.buscarUsuario(transacao.getIdUsuario());
-            TransacaoDto transacaoDto = new TransacaoDto(transacao.getId(), transacao.getDescricao(), transacao.getValor(), categoriaDto, transacao.getClassificacao(), usuarioDto, transacao.getDataTransacao());
+            CategoriaDto categoriaDto = this.categoriaService.buscarCategoriaDto(transacao.getCategoria().getId());
+            UsuarioDto usuarioDto = this.usuarioService.buscarUsuarioDto(transacao.getUsuario().getId());
+            TransacaoDto transacaoDto = new TransacaoDto(transacao.getId(), transacao.getDescricao(),
+                    transacao.getValor(), categoriaDto, transacao.getClassificacao(), usuarioDto,
+                    transacao.getDataTransacao());
             transacaoDtos.add(transacaoDto);
         }
 
@@ -59,12 +74,12 @@ public class TransacaoServiceImpl implements TransacaoService {
     }
 
     @Override
-    public void excluirTransacao(int id) throws DadoNaoEncontradoException {
+    public void excluirTransacao(long id) throws DadoNaoEncontradoException {
         if (id <= 0) {
             throw new DadoNaoEncontradoException("Transação não foi encontrada para remoção");
         }
 
-        boolean sucesso = this.transacaoRepository.excluirTransacao(id);
+        boolean sucesso = this.transacaoDAO.excluirTransacao(id);
 
         if (!sucesso) {
             throw new DadoNaoEncontradoException("Não foi possível remover a transação");
@@ -81,41 +96,32 @@ public class TransacaoServiceImpl implements TransacaoService {
             throw new CampoInvalidoException("Data não pode ser maior que a data atual");
         }
 
-        Transacao transacaoEncontrada = this.transacaoRepository.buscarTransacao(transacao.id());
+        Transacao transacaoEncontrada = this.transacaoDAO.buscarTransacao(transacao.id());
 
         if (transacaoEncontrada == null) {
             throw new DadoNaoEncontradoException("Transação não foi encontrada para edição");
         }
 
-        Transacao transacaoAlterada = new Transacao(transacao.id(), transacao.valor(), transacao.descricao() , transacao.categoriaDto().id(), transacao.classificacao(), transacao.usuarioDto().id(), transacao.dataTransacao());
+        Categoria categoriaTransacao = this.categoriaService.buscarCategoria(transacao.categoriaDto().id());
 
-        this.transacaoRepository.alterarTransacao(transacaoAlterada);
+        Transacao transacaoAlterada = new Transacao(transacao.id(), transacao.valor(), transacao.descricao(), categoriaTransacao,
+                transacao.classificacao(), transacaoEncontrada.getUsuario(), transacao.dataTransacao());
+
+        this.transacaoDAO.alterarTransacao(transacaoAlterada);
     }
 
     @Override
-    public TransacaoDto buscarTransacao(int id) throws DadoNaoEncontradoException {
-        Transacao transacao = this.transacaoRepository.buscarTransacao(id);
+    public TransacaoDto buscarTransacao(long id) throws DadoNaoEncontradoException {
+        Transacao transacao = this.transacaoDAO.buscarTransacao(id);
 
         if (transacao == null) {
             throw new DadoNaoEncontradoException("Transação não foi encontrada");
         }
 
-        UsuarioDto usuarioDto = this.usuarioService.buscarUsuario(transacao.getIdUsuario());
-        CategoriaDto categoriaDto = this.categoriaService.buscarCategoria(transacao.getIdCategoria());
-        return new TransacaoDto(transacao.getId(), transacao.getDescricao(), transacao.getValor(), categoriaDto, transacao.getClassificacao(), usuarioDto, transacao.getDataTransacao());
-    }
-
-    @Override
-    public int getIdProximaTransacao() throws DadoNaoEncontradoException {
-        List<TransacaoDto> transacoes = this.listarTransacoes();
-
-        if (transacoes.isEmpty()) {
-            return 1;
-        }
-
-        TransacaoDto transacao = transacoes.getLast();
-
-        return transacao.id() + 1;
+        UsuarioDto usuarioDto = this.usuarioService.buscarUsuarioDto(transacao.getUsuario().getId());
+        CategoriaDto categoriaDto = this.categoriaService.buscarCategoriaDto(transacao.getCategoria().getId());
+        return new TransacaoDto(transacao.getId(), transacao.getDescricao(), transacao.getValor(), categoriaDto,
+                transacao.getClassificacao(), usuarioDto, transacao.getDataTransacao());
     }
 
     @Override
@@ -133,7 +139,8 @@ public class TransacaoServiceImpl implements TransacaoService {
         }
 
         if (!Utils.isStringVazia(filtroDto.classificacao()) && !Objects.equals(filtroDto.classificacao(), TODAS)) {
-            transacoes = transacoes.stream().filter(x -> x.classificacao().getNome().equals(filtroDto.classificacao())).toList();
+            transacoes = transacoes.stream().filter(
+                    x -> x.classificacao().getNome().equals(filtroDto.classificacao())).toList();
         }
 
         return transacoes;

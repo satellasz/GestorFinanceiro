@@ -30,11 +30,11 @@ public abstract class AbstractController {
 
     public abstract void post(Formulario formulario);
 
-    public void patch(int id) {
+    public void patch(long id) {
 
     }
 
-    public void delete(int id) {
+    public void delete(long id) {
 
     }
 

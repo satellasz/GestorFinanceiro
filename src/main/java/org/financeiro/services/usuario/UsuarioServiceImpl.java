@@ -4,34 +4,34 @@ import org.financeiro.dtos.UsuarioDto;
 import org.financeiro.exceptions.CadastroContaException;
 import org.financeiro.exceptions.DadoNaoEncontradoException;
 import org.financeiro.models.Usuario;
-import org.financeiro.repositories.usuario.UsuarioRepository;
-import org.financeiro.repositories.usuario.UsuarioRepositoryImpl;
+import org.financeiro.daos.usuario.UsuarioDAO;
+import org.financeiro.daos.usuario.UsuarioDAOBancoImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class UsuarioServiceImpl implements UsuarioService {
-    private final UsuarioRepository usuarioRepository = new UsuarioRepositoryImpl();
+    private final UsuarioDAO usuarioDAO = new UsuarioDAOBancoImpl();
 
     @Override
-    public void cadastrarUsuario(UsuarioDto usuario) throws CadastroContaException {
-        Usuario usuarioEncontrado = this.usuarioRepository.buscarUsuario(usuario.nome().trim());
+    public void cadastrarUsuario(String nome, String email, String senha) throws CadastroContaException {
+        Usuario usuarioEncontrado = this.usuarioDAO.buscarUsuario(nome.trim());
         
         if (usuarioEncontrado != null) {
             throw new CadastroContaException("Já existe um usuário com este nome");
         }
 
-        Usuario novoUsuario = new Usuario(this.getIdProximoUsuario() + 1, usuario.nome(), usuario.email(), usuario.senha());
+        Usuario novoUsuario = new Usuario(nome, email, senha);
         
-        this.usuarioRepository.cadastrarUsuario(novoUsuario);
+        this.usuarioDAO.cadastrarUsuario(novoUsuario);
     }
 
     @Override
     public List<UsuarioDto> listarUsuarios() {
         List<UsuarioDto> usuarioDtos = new ArrayList<>();
 
-        for (Usuario usuario : this.usuarioRepository.listarUsuarios()) {
+        for (Usuario usuario : this.usuarioDAO.listarUsuarios()) {
             UsuarioDto usuarioDto = new UsuarioDto(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getSenha());
             usuarioDtos.add(usuarioDto);
         }
@@ -41,14 +41,25 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public UsuarioDto buscarUsuarioLogado() {
-        Usuario usuario = this.usuarioRepository.buscarUsuarioLogado();
+        Usuario usuario = this.usuarioDAO.buscarUsuarioLogado();
 
         return new UsuarioDto(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getSenha());
     }
 
     @Override
-    public UsuarioDto buscarUsuario(int id) throws DadoNaoEncontradoException {
-        Usuario usuario = this.usuarioRepository.buscarUsuario(id);
+    public Usuario buscarUsuario(long id) throws DadoNaoEncontradoException {
+        Usuario usuario = this.usuarioDAO.buscarUsuario(id);
+
+        if (usuario == null) {
+            throw new DadoNaoEncontradoException("Usuário não foi encontrado");
+        }
+
+        return new Usuario(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getSenha());
+    }
+
+    @Override
+    public UsuarioDto buscarUsuarioDto(long id) throws DadoNaoEncontradoException {
+        Usuario usuario = this.usuarioDAO.buscarUsuario(id);
 
         if (usuario == null) {
             throw new DadoNaoEncontradoException("Usuário não foi encontrado");
@@ -58,8 +69,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public UsuarioDto buscarUsuario(String nomeUsuario, String senha) throws DadoNaoEncontradoException {
-        Usuario usuarioEncontrado = this.usuarioRepository.buscarUsuario(nomeUsuario);
+    public UsuarioDto buscarUsuarioDto(String nomeUsuario, String senha) throws DadoNaoEncontradoException {
+        Usuario usuarioEncontrado = this.usuarioDAO.buscarUsuario(nomeUsuario);
 
         if (usuarioEncontrado == null || !Objects.equals(usuarioEncontrado.getSenha(), senha)) {
             throw new DadoNaoEncontradoException("Usuário não encontrado ou senha incorreta");
@@ -74,28 +85,15 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public int getIdProximoUsuario() {
-        List<UsuarioDto> usuarios = this.listarUsuarios();
-
-        if (usuarios.isEmpty()) {
-            return 1;
-        }
-
-        UsuarioDto ultimoUsuario = usuarios.getLast();
-
-        return ultimoUsuario.id() + 1;
-    }
-
-    @Override
     public void setUsuarioLogado(UsuarioDto usuario) {
         if (usuario == null) {
-            this.usuarioRepository.setUsuarioLogado(null);
+            this.usuarioDAO.setUsuarioLogado(null);
 
             return;
         }
 
-        Usuario usuarioEncontrado = this.usuarioRepository.buscarUsuario(usuario.id());
+        Usuario usuarioEncontrado = this.usuarioDAO.buscarUsuario(usuario.id());
 
-        this.usuarioRepository.setUsuarioLogado(usuarioEncontrado);
+        this.usuarioDAO.setUsuarioLogado(usuarioEncontrado);
     }
 }

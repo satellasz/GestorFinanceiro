@@ -4,6 +4,7 @@ import org.financeiro.componentes.Tabela;
 import org.financeiro.dtos.CategoriaDto;
 import org.financeiro.dtos.FiltroDto;
 import org.financeiro.dtos.TransacaoDto;
+import org.financeiro.dtos.UsuarioDto;
 import org.financeiro.viewmodels.TransacaoModelTabela;
 
 import javax.swing.*;
@@ -15,12 +16,14 @@ public class PainelListaTransacoes extends AbstractPainelCentral {
     private final transient List<CategoriaDto> categorias;
     private transient FiltroDto filtroDto;
 
-    public PainelListaTransacoes(List<TransacaoDto> transacaoList, List<CategoriaDto> categorias) {
+    public PainelListaTransacoes(UsuarioDto usuarioDto, List<TransacaoDto> transacaoList, List<CategoriaDto> categorias) {
+        super(usuarioDto);
         this.transacaoList = transacaoList;
         this.categorias = categorias;
     }
 
-    public PainelListaTransacoes(List<TransacaoDto> transacaoList, List<CategoriaDto> categorias, FiltroDto filtroDto) {
+    public PainelListaTransacoes(UsuarioDto usuarioDto, List<TransacaoDto> transacaoList, List<CategoriaDto> categorias, FiltroDto filtroDto) {
+        super(usuarioDto);
         this.transacaoList = transacaoList;
         this.categorias = categorias;
         this.filtroDto = filtroDto;

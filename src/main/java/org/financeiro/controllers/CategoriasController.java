@@ -15,7 +15,7 @@ public class CategoriasController extends AbstractController {
     @Override
     public void get() {
         try {
-            painelService.setPainelConteudo(new PainelListaCategorias(this.categoriaService.listarCategorias()));
+            painelService.setPainelConteudo(new PainelListaCategorias(this.usuarioService.buscarUsuarioLogado(), this.categoriaService.listarCategorias()));
         } catch (DadoNaoEncontradoException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), NAO_ENCONTRADO, JOptionPane.ERROR_MESSAGE);
         }
@@ -28,7 +28,7 @@ public class CategoriasController extends AbstractController {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(long id) {
         try {
             this.categoriaService.excluirCategoria(id, this.transacaoService.listarTransacoes());
             get();
@@ -40,11 +40,12 @@ public class CategoriasController extends AbstractController {
     }
 
     @Override
-    public void patch(int id) {
+    public void patch(long id) {
         try {
-            CategoriaDto categoria = this.categoriaService.buscarCategoria(id);
+            CategoriaDto categoria = this.categoriaService.buscarCategoriaDto(id);
 
-            painelService.setPainelConteudo(new PainelAdicionarCategoria(categoria));
+            painelService.setPainelConteudo(
+                    new PainelAdicionarCategoria(this.usuarioService.buscarUsuarioLogado(), categoria));
             painelService.setBorderPainelTransicao(painelService.getPainelMenu(TipoPainelMenu.CATEGORIAS));
         } catch (DadoNaoEncontradoException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Não encontrado", JOptionPane.ERROR_MESSAGE);

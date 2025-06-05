@@ -2,54 +2,116 @@ package org.financeiro.models;
 
 import org.financeiro.enums.ClassificacaoTransacao;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
+@Table(name = "TRANSACAO")
 public class Transacao {
-    private final int id;
-    private final String descricao;
-    private final double valor;
-    private final int idCategoria;
-    private final ClassificacaoTransacao classificacao;
-    private final int idUsuario;
-    private final LocalDate dataTransacao;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    public Transacao(int id, double valor, String descricao, int idCategoria, ClassificacaoTransacao classificacao, int idUsuario, LocalDate dataTransacao) {
+    @Column(name = "descricao")
+    private String descricao;
+
+    @Column(name = "valor")
+    private double valor;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idCategoria", referencedColumnName = "id")
+    private Categoria categoria;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "classificacao")
+    private ClassificacaoTransacao classificacao;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idUsuario", referencedColumnName = "id")
+    private Usuario usuario;
+
+    @Column(name = "dataTransacao")
+    private LocalDate dataTransacao;
+
+    public Transacao(long id, double valor, String descricao, Categoria categoria, ClassificacaoTransacao classificacao,
+                     Usuario usuario, LocalDate dataTransacao) {
         this.id = id;
         this.descricao = descricao;
         this.valor = valor;
-        this.idCategoria = idCategoria;
+        this.categoria = categoria;
         this.classificacao = classificacao;
-        this.idUsuario = idUsuario;
+        this.usuario = usuario;
         this.dataTransacao = dataTransacao;
     }
 
-    public int getId() {
+    public Transacao(double valor, String descricao, Categoria categoria, ClassificacaoTransacao classificacao,
+                     Usuario usuario, LocalDate dataTransacao) {
+        this.descricao = descricao;
+        this.valor = valor;
+        this.categoria = categoria;
+        this.classificacao = classificacao;
+        this.usuario = usuario;
+        this.dataTransacao = dataTransacao;
+    }
+
+    public Transacao() {
+    }
+
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getDescricao() {
         return descricao;
     }
 
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     public double getValor() {
         return valor;
     }
 
-    public int getIdCategoria() {
-        return idCategoria;
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public ClassificacaoTransacao getClassificacao() {
         return classificacao;
     }
 
+    public void setClassificacao(ClassificacaoTransacao classificacao) {
+        this.classificacao = classificacao;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public LocalDate getDataTransacao() {
         return dataTransacao;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public void setDataTransacao(LocalDate dataTransacao) {
+        this.dataTransacao = dataTransacao;
     }
 
     @Override

@@ -1,34 +1,71 @@
 package org.financeiro.models;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "CATEGORIA")
 public class Categoria {
-    private final int id;
-    private final String nome;
-    private final String descricao;
-    private final int idUsuario;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-    public Categoria(int id, String nome, String descricao, int idUsuario) {
+    @Column(name = "nome")
+    private String nome;
+
+    @Column(name = "descricao")
+    private String descricao;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "idUsuario", referencedColumnName = "id")
+    private Usuario usuario;
+
+    public Categoria(long id, String nome, String descricao, Usuario usuario) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.idUsuario = idUsuario;
+        this.usuario = usuario;
+    }
+
+    public Categoria(String nome, String descricao, Usuario usuario) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.usuario = usuario;
+    }
+
+    public Categoria() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNome() {
         return nome;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public String getDescricao() {
         return descricao;
     }
 
-    public int getId() {
-        return id;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

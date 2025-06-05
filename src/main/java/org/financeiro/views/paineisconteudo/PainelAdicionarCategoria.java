@@ -3,6 +3,7 @@ package org.financeiro.views.paineisconteudo;
 import org.financeiro.componentes.CampoTexto;
 import org.financeiro.componentes.CampoTextoArea;
 import org.financeiro.dtos.CategoriaDto;
+import org.financeiro.dtos.UsuarioDto;
 import org.financeiro.enums.TipoCampoTexto;
 import org.financeiro.enums.TipoInputComponente;
 
@@ -12,11 +13,13 @@ import java.awt.*;
 public class PainelAdicionarCategoria extends AbstractPainelCentral {
     private transient CategoriaDto categoria = null;
 
-    public PainelAdicionarCategoria(CategoriaDto categoria) {
+    public PainelAdicionarCategoria(UsuarioDto usuarioDto, CategoriaDto categoria) {
+        super(usuarioDto);
         this.categoria = categoria;
     }
 
-    public PainelAdicionarCategoria() {
+    public PainelAdicionarCategoria(UsuarioDto usuarioDto) {
+        super(usuarioDto);
     }
 
     @Override

@@ -1,17 +1,17 @@
-package org.financeiro.repositories.transacao;
+package org.financeiro.daos.transacao;
 
 import org.financeiro.models.Transacao;
 
 import java.util.List;
 
-public interface TransacaoRepository {
+public interface TransacaoDAO {
     void cadastrarTransacao(Transacao transacao);
 
     List<Transacao> listarTransacoes();
 
-    boolean excluirTransacao(int id);
+    boolean excluirTransacao(long id);
 
     void alterarTransacao(Transacao transacao);
 
-    Transacao buscarTransacao(int id);
+    Transacao buscarTransacao(long id);
 }
